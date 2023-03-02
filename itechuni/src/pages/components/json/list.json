@@ -1,0 +1,27 @@
+[
+    {
+      "value": "1",
+      "subject": "Integrative Programming and Technologies",
+      "faculty":"Mr. Dario C. Miñoza Jr",
+      "schedule":"W 7:00 PM - 9:00 PM"
+    },
+    {
+      "value": "2",
+      "subject": "Integrative Programming and Technologies",
+      "faculty":"Mr. Dario C. Miñoza Jr",
+      "schedule":"S 1:30 PM - 4:30 PM"
+    },
+    {
+      "value": "3",
+      "subject": "Applications Development and Emerging Technologies",
+      "faculty":"JIM MARKLINO LAO",
+      "schedule":"M 6:00 PM - 9:00"
+    },
+    {
+      "value": "4",
+      "subject": "Applications Development and Emerging Technologies",
+      "faculty":"JIM MARKLINO LAO",
+      "schedule":"S 9:00 AM - 11:00 AM"
+    }
+   
+]

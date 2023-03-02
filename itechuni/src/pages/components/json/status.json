@@ -1,0 +1,14 @@
+[
+    {
+        "value" : "A",
+        "label" : "Single"
+    },
+    {
+        "value" : "B",
+        "label" : "Married"
+    },
+    {
+        "value" : "C",
+        "label" : "Separated"
+    }
+]
