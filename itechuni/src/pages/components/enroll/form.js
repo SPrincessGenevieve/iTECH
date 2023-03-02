@@ -48,7 +48,7 @@ export default function Form() {
             />
           </div>
           <div>
-            <SearchBtn props="Search Student"></SearchBtn>
+            <SearchBtn props="ENTER STUDENT"></SearchBtn>
           </div>
         </div>
         <div style={{marginLeft:"12%"}}>
