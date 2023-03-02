@@ -4,7 +4,6 @@ import ForgotPassBtn from './component/ForgotPassBtn';
 import InputBox from './component/input';
 import LoginBtn from './component/LoginBtn';
 import bg from './component/css/background.png';
-import logo from './../Images/logo.png';
 
 
 function Login({onClick}) {
