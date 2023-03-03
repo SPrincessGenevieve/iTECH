@@ -1,0 +1,97 @@
+.Prof-Info{
+    height: 2.8rem;
+    width: 71%;
+    background-color: #361901;
+    color: white;
+    margin-left: 25%;
+    margin-Top: 5rem;
+    font-family: sans;
+
+}
+form{
+    margin-left: 25%;
+    margin-top: 0rem;
+}
+  form > div {
+    display: flex;
+    float: left;
+    
+  }
+  .input-style {
+    border: 3px solid;
+    border-color: rgb(68, 40, 3);
+    border-radius: 10px;
+    height: 2.5rem;
+    width: 27rem;
+    margin: 2%;
+    margin-left: .6rem;
+  }
+  .input-name {
+    font-family: sans;
+    font-size: 9px;
+    margin-bottom: -10px;
+    
+  }
+  .form-control{
+    border: 3px solid;
+    border-color: rgb(68, 40, 3);
+    border-radius: 10px;
+    height: 2.5rem;
+    width: 27rem;
+    margin-top: .5rem ;
+    margin-left: .7rem;
+    
+  }
+  .input-address{
+    border: 3px solid;
+    border-color: rgb(68, 40, 3);
+    border-radius: 10px;
+    height: 2.5rem;
+    width: 54.3rem;
+    margin-left: 5px;
+    margin: 5px;
+  }
+  .input-number{
+    border: 3px solid;
+    border-color: rgb(68, 40, 3);
+    border-radius: 10px;
+    height: 2.5rem;
+    width: 54.3rem;
+    margin-left: 5px;
+    margin: 5px;
+  }
+  .input-add{
+    margin: 5px;
+    border: 3px solid;
+    border-color: rgb(68, 40, 3);
+    border-radius: 10px;
+    height: 2.5rem;
+    width: 54.3rem;
+    margin-left: 5px;
+
+  }
+  .button-text{
+    font-size: 1.5rem;
+    color: rgb(255, 255, 255);
+    font-family: sans;
+  }
+  .btn-edit{
+    background: #361901;
+    border-radius: 10px;
+    width: 10rem;
+    height: 3rem;
+    margin-left: 3rem;
+    margin-top: 10rem;
+    float: left;
+    cursor: pointer;
+    transition: hover;
+  }
+  .btn-prof-edit{
+    background: #361901;
+    width: 13rem;
+    height: 2rem;
+    cursor: pointer;
+    margin-left: 10rem;
+    margin-top: 0.5rem;
+    transition: hover;
+  }
