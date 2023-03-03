@@ -1,0 +1,99 @@
+.grey-container{
+    background-color: #EBECF0;
+    width: 96%;
+    padding: 20%;
+    margin: 40px;
+    border-radius: 20px;
+}
+.text{
+    text-align: center;
+    font-size: 30px;
+    justify-content: center;
+    font-family: Cambria;
+    padding: 3rem;
+
+}
+
+.Box{
+    float: left;
+    margin-top: -20rem;
+    margin-left: -20rem;
+    height: 200px;
+    width: 380px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    
+}
+.Box1{
+    float: left;
+    margin-top: -20rem;
+    margin-left: 7rem;
+    height: 200px;
+    width: 380px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+}
+.Box2{
+    
+    margin-top: -20rem;
+    margin-left: 34rem;
+    float: left;
+    height: 200px;
+    width: 380px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+}
+.Box3{
+    margin-top: -20rem;
+    margin-left: 61.5rem;
+    float: left;
+    height: 200px;
+    width: 380px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+}
+.Box4{
+    float: left;
+    margin-top: 10rem;
+    margin-left: -1290px;
+    height: 200px;
+    width: 380px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+}
+.Box5{
+    float: left;
+    margin-top: 10rem;
+    margin-left: -853px;
+    height: 200px;
+    width: 380px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+}
+.Box6{
+    float: left;
+    margin-top: 10rem;
+    margin-left: -300rem;
+    height: 200px;
+    width: 380px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+}
+.Box7{
+    float: left;
+    margin-top: 10rem;
+    margin-left: -26rem;
+    height: 200px;
+    width: 380px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+}
+.Box8{
+    float: left;
+    margin-top: 10rem;
+    
+    height: 200px;
+    width: 380px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+}
