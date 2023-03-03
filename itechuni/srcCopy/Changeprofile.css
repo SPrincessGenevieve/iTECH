@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.img-holder{
+    width:  180px;
+    height: 180px;
+    border:  2px solid black;
+    border-radius: 5px;
+    margin-top: -2.5rem;
+    margin-left:-20rem;
+    
+}
+.img{
+    width: 176px;
+    height: 176px;
+    object-fit: cover;
+}
+#input[type = "file"]{
+    display: none;
+}
+.label{
+    width: 20rem;
+    height: 5rem;
+    margin-top: 1rem;
+    margin-left: -8.5rem;
+}
+.image-upload{
+    background-color: rgb(36, 16, 2);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size:2rem;
+    font-family: sans;
+    margin-left: -59%;
+    margin-top: 50%;
+}
