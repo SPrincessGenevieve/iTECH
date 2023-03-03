@@ -1,10 +1,12 @@
 import './../../../../App.css'
 import MaterialTable from '@material-table/core';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
+import api from './../../json/enrollees.json'
+
 
 function Records() {
-  const [data, setData] = useState([
+  const emptList = [
     {
       enrollNo: "23011401",
       studNo: "1010203940",
@@ -41,11 +43,12 @@ function Records() {
       term: "2nd Semester",
       balance: "₱15,000"
     }
-  ]);
+  ]
 
-
-
+  
+  const [data, setData] = useState([]);
   const columns = [
+    { title: "ID", field: "id"},
     { title: "Enrollment No.", field: "enrollNo"},
     { title: "Student No.", field: "studNo" },
     { title: "Lastname", field: "lastname" },
@@ -56,12 +59,17 @@ function Records() {
 
   ]
 
+  useEffect(() =>{
+    fetch('./../../json/enrollees.json')
+    .then(resp =>resp.json())
+    .then(resp => setData(resp))
+  },[])
+
 
 
   return (
     <div className="App">
-
-      <MaterialTable
+        <MaterialTable
         className="violationTable"
         columns={columns}
         data={data}
