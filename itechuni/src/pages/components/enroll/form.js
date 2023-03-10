@@ -19,21 +19,9 @@ export default function Form() {
     return(
       
       <div>
-        {show ? (
-          <>
-          <FormEnroll onClick={() => setShow(!show)}></FormEnroll>
-        </>
-      
-        ) : null
-      }
+  
+        <FinalForm onClick={() => setShowForm(!showForm)}></FinalForm>
 
-          {showForm ? (
-              <>
-              <FinalForm onClick={() => setShowForm(!showForm)}></FinalForm>
-            </>
-          
-            ) : null
-          }
 
         <div style={{margin:20, padding: 20, display:"block", marginTop:50, marginLeft: "30%", marginRight:"30%", borderRadius: 30, border: "1px solid #3A302A"}}>
           <div style={{marginTop: 10, display:"flex", flexDirection:"row", marginBottom:"2%", paddingBottom: 20, borderBottom: "1px solid black"}}>

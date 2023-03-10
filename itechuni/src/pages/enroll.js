@@ -42,14 +42,6 @@ const Enroll = () => {
         </div>
       
       <div>
-        
-        <div style={{padding: 10, marginLeft:"80%", marginBottom: -60}}>
-          <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-            <SearchIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-            <TextField id="SearchStud" label="search student" variant="standard" />
-          </Box>
-        </div>
-
         <div>
           <Form ></Form>
         </div>

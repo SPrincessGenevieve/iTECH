@@ -6,28 +6,21 @@ import OwnTable from './FormEnroll/OwnTable';
 import facultyData from './../json/facultyJSON.json'
 import subData from './../json/subjects.json'
 import schedData from './../json/schedJSON.json'
+import PropsBtn from './PropsBtn';
+import Confirm from './Confirm';
 
-function FormEnroll({onClick}) {
-
-    const [addFormData, setAddFormData] = useState({
-        subject: '',
-        faculty: '',
-        schedule: ''
-    })
-    const handleAddFormChange = (event) =>{
-        event.preventDefault();
-
-        const fieldName = event.target.getAttribute('subject')
-        const fieldValue = event.target.value;
-        const newFormData = { ...addFormData};
-        newFormData[fieldName] = fieldValue;
-
-        setAddFormData(newFormData)
-    }
+function FormEnroll({onClick, clickConfirm}) {
+    const [show, setShow] = useState(false)
 
     return (
 
         <div>
+            {show ? (<>
+                <Confirm onClick={clickConfirm}></Confirm>
+            <div style={{backgroundColor:"black",  width: "100%", height: '70rem'}}></div></>
+            ) : null}
+            
+
             <div style={{backgroundColor:"black", position:'absolute', display:'flex', width: "100%", height: '70rem', opacity: 0.6, marginTop: -50, marginBottom: 60, zIndex: 2,}}></div>
                 <div id='outer' className='outer' style= {{borderRadius: 20, backgroundColor:"white",  position:"fixed", display:"flex", width: "50%", height: "80%", zIndex: 2, marginTop:"-2%", marginLeft:"25%", marginRight:"25%"}}> 
                     <div className='inner' style= {{ backgroundColor:"white", position:"fixed", display:"flex", width: "47.5%", height: "75%", margin: 25, zIndex: 2 }}>
@@ -50,7 +43,11 @@ function FormEnroll({onClick}) {
                             </div>
                             <div style={{display:"flex", position:"fixed", marginLeft: "-1.5rem"}}>
                                 <OwnTable></OwnTable>
+                                <div style={{marginTop: "25rem", marginLeft: "20rem"}}>
+                                    <PropsBtn onClick={() => setShow(!show)} props="ENROLL STUDENT"></PropsBtn>
+                                </div>
                             </div>
+                            
                             
                         </div>  
                     </div>
