@@ -1,6 +1,7 @@
 import MaterialTable from '@material-table/core';
 import React, { useState } from 'react';
-import tableIcons from './MaterialTableIcons';
+
+
 
 
 function DataGrid() {
@@ -10,7 +11,7 @@ function DataGrid() {
     ])
     return (
         <div>
-            <MaterialTable columns={column} data={data} icons={tableIcons} title="SUBJECTS ENROLLED"
+            <MaterialTable columns={column} data={data} title="SUBJECTS ENROLLED"
                 editable={{
                     
                     onRowDelete: oldData =>
