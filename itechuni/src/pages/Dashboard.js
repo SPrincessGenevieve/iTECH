@@ -7,7 +7,7 @@ const Dashboard = () => {
   return (
     <>
       <Navbar></Navbar>
-      <div className='grey-container' >
+      <div style={{ backgroundColor: "#EBECF0", width: "96%", height: 10, padding: "20%", margin: 40, borderRadius: 20 }} >
         <div style={{ display: "flex", flexDirection: "row", marginTop: "-20.5rem", marginLeft: "-20.5rem" }}>
           <div><Container title="Total Students Enrolled"></Container></div>
 
