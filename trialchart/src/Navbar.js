@@ -10,6 +10,14 @@ export default function Navbar() {
         <CustomLink to="/enrollees">Enrollees</CustomLink>
         <CustomLink to="/profile">Profile</CustomLink>
       </ul>
+      <div style={{display:"flex", flexDirection:"row", alignItems:"center", marginLeft:"45rem"}}> 
+        <div >
+          <h4>
+            Aarone
+          </h4>
+        </div>
+      <div style={{width: 50, height: 50, backgroundColor:"white", borderRadius: 50, marginLeft: 20}}></div>
+      </div>
     </nav>
   )
 }
