@@ -1,0 +1,29 @@
+  
+table {
+    border: 1px solid rgb(230, 230, 230);
+    width: 800px;
+    height: 20px;
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+    
+  th {
+    border-bottom: 1px solid rgb(187, 187, 187);
+  }
+    
+  td {
+    text-align: left;
+    border-bottom: 1px solid rgb(230, 230, 230);
+    border-right: 1px solid rgb(230, 230, 230);
+    border-left: 1px solid rgb(230, 230, 230);
+    padding: 10px;
+  }
+  .tableCss {
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content:left;
+    align-items: left;
+    
+  }
