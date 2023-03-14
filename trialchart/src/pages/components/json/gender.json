@@ -1,10 +1,10 @@
 [
     {
-    "value" : "M",
+    "value" : "Male",
     "label" : "Male"
     },
     {
-        "value" : "F",
+        "value" : "Female",
         "label" : "Female"
     }
 ]

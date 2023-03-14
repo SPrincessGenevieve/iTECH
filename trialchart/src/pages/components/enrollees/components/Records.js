@@ -1,58 +1,50 @@
 import './../../../../App.css'
 import MaterialTable from '@material-table/core';
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect  } from 'react';
+import CheckBoxes from './../../enroll/finalForm/components/CheckBoxes'
+import axios from 'axios';
+import ParentsInfo from './ParentsInfo.js'
+import { Button } from '@mui/material';
+import StudentInfo from './StudentInfo';
+import SubjectEnrolled from './SubjectEnrolled';
+import SchoolInfo from './SchoolInfo';
 
-function Records() {
-  const [data, setData] = useState([
-    {
-      enrollNo: "23011401",
-      studNo: "1010203940",
-      lastname: "Sagrado",
-      firstname: "Princess Genevieve",
-      year: "1st Year",
-      term: "1st Semester",
-      balance: "₱10,000"
-    },
-    {
-      enrollNo: "230114045",
-      studNo: "1010223340",
-      lastname: "Santos",
-      firstname: "Aarone Rodel",
-      year: "3rd Year",
-      term: "2nd Semester",
-      balance: "₱15,000"
-    },
-    {
-      enrollNo: "23011433",
-      studNo: "1010234340",
-      lastname: "Fabores",
-      firstname: "Margie",
-      year: "4th Year",
-      term: "2nd Semester",
-      balance: "₱15,000"
-    },
-    {
-      enrollNo: "23011422",
-      studNo: "1010223340",
-      lastname: "Bagongon",
-      firstname: "Trisha",
-      year: "2nd Year",
-      term: "2nd Semester",
-      balance: "₱15,000"
-    }
-  ]);
+function Records({ label, key, onChange, checked }) {
+  const [data, setData] = useState([]);
+  const [isChecked, setIsChecked] = useState(false);
+
+  const [activeTab, setActiveTab] = React.useState('student');
+
+  const handleButtonClick = (tab) => {
+    setActiveTab(tab);
+  };
+
+  useEffect(() => {
+    fetch("http://localhost:3000/posts") // replace with your JSON Server endpoint
+      .then((response) => response.json())
+      .then((json) => setData(json));
+  }, []);
 
 
 
   const columns = [
-    { title: "Enrollment No.", field: "enrollNo"},
-    { title: "Student No.", field: "studNo" },
-    { title: "Lastname", field: "lastname" },
-    { title: "Firstname", field: "firstname" },
+    { title: "Enrollment No.", field: "enrollno"},
+    { title: "Student No.", field: "studno" },
+    { title: "Last name", field: "lastname" },
+    { title: "First name", field: "firstname" },
     { title: "Year Level", field: "year" },
-    { title: "Term", field: "term" },
     { title: "Balance", field: "balance" },
+
+  ]
+
+  const subcolumns = [
+    { title: "Last name", field: "Mlastname" },
+    { title: "First name", field: "Mfirstname" },
+    { title: "Age", field: "Mage" },
+    { title: "Educational Attainment", field: "MeducAttain" },
+    { title: "Address", field: "Maddres" },
+    { title: "Average Income", field: "Mincome" },
 
   ]
 
@@ -103,15 +95,38 @@ function Records() {
           exportAllData: true,
           exportFileName: "ENROLLMENT RECORDS",
           pageSizeOptions: [5, 10, 20, 25, 50, 100],
-          pageSize: 10,
+          pageSize: 7,
           paginationPosition: "both",
           actionsColumnIndex: -1,
         }}
         detailPanel={rowData =>{
           return(
-            <MaterialTable/>
-          )
-        }}
+            <>
+            <div style={{marginRight: 10}}>
+              
+              <Button variant='contained' onClick={() => handleButtonClick('student')} sx={{marginRight: 2}}>STUDENT INFORMATION</Button>
+              <Button variant='contained' onClick={() => handleButtonClick('subject')} sx={{marginRight: 2}}>SUBJECTS ENROLLED</Button>
+              <Button variant='contained' onClick={() => handleButtonClick('parents')} sx={{marginRight: 2}}>PARENT INFORMATION</Button>
+              <Button variant='contained' onClick={() => handleButtonClick('school')} >SCHOOL ATTENDED</Button>
+            </div>
+
+            {activeTab === 'student' && (
+              <StudentInfo></StudentInfo>
+            )}
+            
+            {activeTab === 'parents' && (
+              <ParentsInfo></ParentsInfo>
+            )}
+            {activeTab === 'subject' && (
+              <SubjectEnrolled></SubjectEnrolled>
+            )}
+
+            {activeTab === 'school' && (
+              <SchoolInfo></SchoolInfo>
+            )}
+                </>
+              )
+            }}
       >
       </MaterialTable>
     </div>

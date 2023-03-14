@@ -1,42 +1,42 @@
 [
     {
-        "value" : "1",
+        "value" : "Roman Catholic",
         "label" : "Roman Catholic"
     },
     {
-        "value" : "2",
+        "value" : "Iglesia ni Cristo",
         "label" : "Iglesia ni Cristo"
     },
     {
-        "value" : "3",
+        "value" : "Evangelicals (PCEC)",
         "label" : "Evangelicals (PCEC)"
     },
     {
-        "value" : "4",
+        "value" : "Non-Roman Catholic and Protestant (NCCP)",
         "label" : "Non-Roman Catholic and Protestant (NCCP)"
     },
     {
-        "value" : "5",
+        "value" : "Aglipayan",
         "label" : "Aglipayan"
     },
     {
-        "value" : "6",
+        "value" : "Seventh-day Adventist",
         "label" : "Seventh-day Adventist"
     },
     {
-        "value" : "7",
+        "value" : "Bible Baptist Church",
         "label" : "Bible Baptist Church"
     },
     {
-        "value" : "8",
+        "value" : "United Church of Christ in the Philippines",
         "label" : "United Church of Christ in the Philippines"
     },
     {
-        "value" : "9",
+        "value" : "Jehovah's Witnesses",
         "label" : "Jehovah's Witnesses"
     },
     {
-        "value" : "10",
+        "value" : "Islam",
         "label" : "Islam"
     }
 ]

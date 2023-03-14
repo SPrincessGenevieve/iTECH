@@ -1,0 +1,76 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "PSA": false,
+      "Card": "on",
+      "TOR": "on",
+      "COR": "on",
+      "Pic": "on",
+      "enrollno": 20230314,
+      "studno": 2020305950,
+      "lastname": "Sagrado",
+      "firstname": "Princess Genevieve",
+      "middlename": "Gabule",
+      "year": "Third Year",
+      "balance": 10000,
+      "email": "example@gmail.com",
+      "bday": "20/03/2000",
+      "address": "Cugman, CDO",
+      "perAdd": "Mambajao, Camigiuin",
+      "postalcode": "9000",
+      "contactno": "09384859684",
+      "religion": "Roman Catholic",
+      "gender": "Female",
+      "status": "Single",
+      "Mlastname": "Sagrado",
+      "Mfirstname": "Primrose",
+      "Mage": "47",
+      "MeducAttain": "College Graduate",
+      "Maddres": "Mambajao, Camiguin",
+      "Mincome": "10,000",
+      "MEmail": "mother@gmail.com",
+      "MContact": "09082364732",
+      "Plastname": "Sagrado",
+      "Pfirstname": "Ginn",
+      "Page": "54",
+      "PeducAttain": "College Graduate",
+      "Paddres": "Mambajao, Camiguin",
+      "Pincome": "20,000",
+      "PEmail": "father@gmail.com",
+      "PContact": "09082364732",
+      "ElemName": "Paradise Island Christian School",
+      "ElemAdd": "Lakas, Mambajao, Camiguin",
+      "JunioName": "Fatima College of Camiguin",
+      "JuniorAdd": "Lumad, Mambajao, Camiguin",
+      "SeniorName": "Fatima College of Camiguin",
+      "SeniorAdd": "Lumad, Mambajao, Camiguin",
+      "CollageName": "University of Science and Technology of Southern Philippines",
+      "CollegeAdd": "Lapasan, CDO"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "enrolled":[ 
+    {
+    "subject" : "Integrative Programming and Technologies",
+    "faculty": "Mr. Dario C. Miñoza Jr",
+    "schedule" : "W 7:00 PM - 9:00 PM"
+  },
+  {
+    "subject" : "Applications Development and Emerging Technologies",
+    "faculty": "JIM MARKLINO LAO",
+    "schedule" : "S 1:30 PM - 4:30 PM"
+  },
+  {
+    "subject" : "Quantitative Methods",
+    "faculty": "Mrs. RHEGIE CAGA-ANAN",
+    "schedule" : "M 6:00 PM - 9:00 PM"
+  }
+]
+}

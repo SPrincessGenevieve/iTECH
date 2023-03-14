@@ -1,18 +1,18 @@
 [
     {
-      "value": "Y1",
+      "value": "First Year",
       "label": "First Year"
     },
     {
-      "value": "Y2",
+      "value": "Second Year",
       "label": "Second Year"
     },
     {
-      "value": "Y3",
+      "value": "Third Year",
       "label": "Third Year"
     },
     {
-      "value": "Y4",
+      "value": "Fourth Year",
       "label": "Fourth Year"
     }
 ]

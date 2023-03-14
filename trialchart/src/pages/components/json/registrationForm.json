@@ -1,0 +1,52 @@
+[
+    {"studentInfo" : [
+        
+            {
+                "enrollNo": "",
+                "studNo": "",
+                "balance": "",
+                "year": "",
+                "lastname": "",
+                "firstname": "",
+                "middlename": "",
+                "email": "",
+                "bday": "",
+                "address": "",
+                "perAdd": "",
+                "postalcode": "",
+                "contactno": "",
+                "religion": "",
+                "gender": "",
+                "status": "",
+
+                "maternalLastname": "",
+                "maternalFirstname": "",
+                "maternalAge": "",
+                "maternalEducAttain": "",
+                "maternalAddress": "",
+                "maternalContact":"",
+                "maternalEmail":"",
+                "maternalIncome": "",
+
+                "paternalLastname": "",
+                "paternalFirstname": "",
+                "paternalAge": "",
+                "paternalEducAttain": "",
+                "paternalAddress": "",
+                "paternalContact":"",
+                "paternalEmail":"",
+                "paternalIncome": "",
+
+                "elementarySchoolName": "",
+                "elementaryAddress": "",
+                "juniorSchoolName": "",
+                "juniorAddress": "",
+                "seniorSchoolName": "",
+                "seniorAddress": "",
+                "collegeSchoolName": "",
+                "collegeAddress": ""
+            }
+        
+    ]}
+    
+]
