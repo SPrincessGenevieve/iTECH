@@ -27,44 +27,50 @@ function StudentInfo(props) {
     }
 
     useEffect(() => {
-        fetch("http://localhost:3000/posts") // replace with your JSON Server endpoint
-          .then((response) => response.json())
-          .then((json) => setData(json));
+        axios.get('http://localhost:3000/posts')
+          .then(response => setData(response.data))
+          .catch(error => console.log(error));
       }, []);
+
+      
        
     return (
-        <div>
-            {show ? 
+        <div style={{marginLeft: "13rem"}}>
+            {data.map(item =>(
+
+                <>
+                {show ? 
+            
             <form>
             <div>
                 <div>
                     <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                        <div><InputBoxFinal disabled label="Last name"/></div>
-                        <div><InputBoxFinal disabled label="First name"/> </div>    
+                        <div><InputBoxFinal focused value={item.lastname} disabled label="Last name"/></div>
+                        <div><InputBoxFinal focused value={item.firstname} disabled label="First name"/> </div>    
                     </div>
                     <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                        <div><InputBoxFinal disabled label="Middle Name"/></div>
-                        <div><InputBoxFinal disabled label="Email Address"/></div>
+                        <div><InputBoxFinal focused value={item.middlename} disabled label="Middle Name"/></div>
+                        <div><InputBoxFinal focused value={item.email} disabled label="Email Address"/></div>
                     </div>
                     <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                        <div><InputBoxFinal disabled label="Birthday" id="date" type="date" InputLabelProps={{shrink: true}}/></div>
-                        <div><InputBoxFinal disabled label="Address"/></div>
+                        <div><InputBoxFinal focused value={item.bday} disabled label="Birthday" id="date" type="date" InputLabelProps={{shrink: true}}/></div>
+                        <div><InputBoxFinal focused value={item.address} disabled label="Address"/></div>
                     </div>
 
                     <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                        <div><InputBoxFinal disabled label="Permanent Address"/></div>
-                        <div><InputBoxFinal disabled label="Postal Code"/></div>
+                        <div><InputBoxFinal focused value={item.perAdd} disabled label="Permanent Address"/></div>
+                        <div><InputBoxFinal focused value={item.postalcode} disabled label="Postal Code"/></div>
                     </div>
                     
                     <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                        <div><InputBoxFinal disabled type="number" label="Contact Number"/></div>
-                        <div><SelectionForm disabled label="Religion" Label="Religion" data={Religion}/></div>
+                        <div><InputBoxFinal focused value={item.contactno} disabled type="number" label="Contact Number"/></div>
+                        <div><SelectionForm focused value={item.religion} disabled label="Religion" Label="Religion" data={Religion}/></div>
                     </div>
                     
                     <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                        <div><SelectionForm disabled label="Gender" Label="Gender" data={Gender}/></div>
+                        <div><SelectionForm focused value={item.gender} disabled label="Gender" Label="Gender" data={Gender}/></div>
                         <div style={{marginLeft:10}}>
-                            <SelectionForm disabled label="Status" Label="Status" data={Status}></SelectionForm>
+                            <SelectionForm focused value={item.status} disabled label="Status" Label="Status" data={Status}></SelectionForm>
                         </div>
                     </div>
                 </div>
@@ -75,32 +81,32 @@ function StudentInfo(props) {
                 <div>
                     <div>
                         <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                            <div><InputBoxFinal label="Last name"/></div>
-                            <div><InputBoxFinal label="First name"/> </div>    
+                            <div><InputBoxFinal focused label="Last name"/></div>
+                            <div><InputBoxFinal focused label="First name"/> </div>    
                         </div>
                         <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                            <div><InputBoxFinal label="Middle Name"/></div>
-                            <div><InputBoxFinal label="Email Address"/></div>
+                            <div><InputBoxFinal focused label="Middle Name"/></div>
+                            <div><InputBoxFinal focused label="Email Address"/></div>
                         </div>
                         <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                            <div><InputBoxFinal label="Birthday" id="date" type="date" InputLabelProps={{shrink: true}}/></div>
-                            <div><InputBoxFinal label="Address"/></div>
+                            <div><InputBoxFinal focused label="Birthday" id="date" type="date" InputLabelProps={{shrink: true}}/></div>
+                            <div><InputBoxFinal focused label="Address"/></div>
                         </div>
 
                         <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                            <div><InputBoxFinal label="Permanent Address"/></div>
-                            <div><InputBoxFinal label="Postal Code"/></div>
+                            <div><InputBoxFinal focused label="Permanent Address"/></div>
+                            <div><InputBoxFinal focused label="Postal Code"/></div>
                         </div>
                         
                         <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                            <div><InputBoxFinal type="number" label="Contact Number"/></div>
-                            <div><SelectionForm label="Religion" Label="Religion" data={Religion}/></div>
+                            <div><InputBoxFinal focused type="number" label="Contact Number"/></div>
+                            <div><SelectionForm focused label="Religion" Label="Religion" data={Religion}/></div>
                         </div>
                         
                         <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                            <div><SelectionForm label="Gender" Label="Gender" data={Gender}/></div>
+                            <div><SelectionForm focused label="Gender" Label="Gender" data={Gender}/></div>
                             <div style={{marginLeft:10}}>
-                                <SelectionForm label="Status" Label="Status" data={Status}></SelectionForm>
+                                <SelectionForm focused label="Status" Label="Status" data={Status}></SelectionForm>
                             </div>
                         </div>
                     </div>
@@ -108,11 +114,18 @@ function StudentInfo(props) {
               </form>
 
             }
+                </>
+
+
+            ))}
+
+
+            
             
               <div>
-              {show && <Button onClick={handleClick} variant='contained'>EDIT</Button>}
+              {show && <Button onClick={handleClick} variant='contained' style={{width: "15rem", margin: 50}}>EDIT</Button>}
               
-              {!show && <Button onClick={handleSaveClick} variant='contained'>SAVE</Button>}
+              {!show && <Button onClick={handleSaveClick} variant='contained' style={{width: "15rem", margin: 50}}>SAVE</Button>}
             </div>
         </div>
     );

@@ -19,6 +19,7 @@ export default function SelectionForm({disabled, key, InputLabelID, Label, id, o
           value={value}
           label={label}
           onChange={onChange}
+          color="grey"
         >{data.map((SUB1) => (
           <MenuItem key={SUB1.value} value={SUB1.value}>
           {SUB1.label}

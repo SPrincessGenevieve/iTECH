@@ -340,7 +340,7 @@ export default function Form() {
               </div>
 
               <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                  <div><InputBoxFinal onChange={handleenrollno} label="Enrollment No."/></div>
+                  <div><InputBoxFinal disabled onChange={handleenrollno} label="Enrollment No."/></div>
                   <div><InputBoxFinal onChange={handlestudno} label="Student No."/> </div>    
               </div>
 
@@ -410,12 +410,12 @@ export default function Form() {
                       <text style={{fontSize: 30}}>Schools Attended by the Applicant</text>
                   </div>
                   <div style={{display:"flex", flexDirection:"row", marginBottom: -20}}>
-                      <SchoolAttended label1="School name" label2="Address" title="ELEMENTARY"></SchoolAttended>
-                      <SchoolAttended label1="School name" label2="Address" title="JUNIOR HIGH SCHOOL"></SchoolAttended>
+                      <SchoolAttended onChangeName={handleElemName} onChangeAdd={handleElemAdd} label1="School name" label2="Address" title="ELEMENTARY"></SchoolAttended>
+                      <SchoolAttended onChangeName={handleJunioName} onChangeAdd={handleJuniorAdd} label1="School name" label2="Address" title="JUNIOR HIGH SCHOOL"></SchoolAttended>
                   </div>
                   <div style={{display:"flex", flexDirection:"row"}}>
-                      <SchoolAttended label1="School name" label2="Address" title="SENIOR JUNIOR HIGH SCHOOL"></SchoolAttended>
-                      <SchoolAttended label1="School name" label2="Address" title="COLLEGE"></SchoolAttended>
+                      <SchoolAttended onChangeName={handleSeniorName} onChangeAdd={handleSeniorAdd} label1="School name" label2="Address" title="SENIOR JUNIOR HIGH SCHOOL"></SchoolAttended>
+                      <SchoolAttended onChangeName={handleCollageName} onChangeAdd={handleCollegeAdd} label1="School name" label2="Address" title="COLLEGE"></SchoolAttended>
                   </div>
                   <div style={{display:"flex", flexDirection:"row", marginLeft: "73rem"}}>
                       <PropsBtn backgroundColor='red' props="CANCEL"></PropsBtn>

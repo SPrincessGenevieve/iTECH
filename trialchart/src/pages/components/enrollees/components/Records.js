@@ -9,16 +9,34 @@ import { Button } from '@mui/material';
 import StudentInfo from './StudentInfo';
 import SubjectEnrolled from './SubjectEnrolled';
 import SchoolInfo from './SchoolInfo';
+import { makeStyles } from '@material-ui/core';
+
+
+const useStyles = makeStyles({
+  root: {
+    '&:hover': {
+      backgroundColor: '#3A302A !important',
+      color:'white !important'
+    },
+  },
+});
+
 
 function Records({ label, key, onChange, checked }) {
   const [data, setData] = useState([]);
-  const [isChecked, setIsChecked] = useState(false);
+  const [activeTab, setActiveTab] = useState('student');
+  const [selectTab, setSelectedTab] = useState('student')
+  const classes = useStyles();
+  const [selectedId, setSelectedId] = useState(null);
 
-  const [activeTab, setActiveTab] = React.useState('student');
-
-  const handleButtonClick = (tab) => {
+   const handleButtonClick = (tab, button) => {
     setActiveTab(tab);
   };
+
+  const handleTabChange = (tabName) => {
+    setSelectedTab(tabName);
+  };
+
 
   useEffect(() => {
     fetch("http://localhost:3000/posts") // replace with your JSON Server endpoint
@@ -26,9 +44,12 @@ function Records({ label, key, onChange, checked }) {
       .then((json) => setData(json));
   }, []);
 
+  
+
 
 
   const columns = [
+    { title: "Id", field: "id", key: "id"},
     { title: "Enrollment No.", field: "enrollno"},
     { title: "Student No.", field: "studno" },
     { title: "Last name", field: "lastname" },
@@ -48,8 +69,8 @@ function Records({ label, key, onChange, checked }) {
 
   ]
 
-
-
+  const [selectedRowId, setSelectedRowId] = useState(null);
+  
   return (
     <div className="App">
 
@@ -99,16 +120,21 @@ function Records({ label, key, onChange, checked }) {
           paginationPosition: "both",
           actionsColumnIndex: -1,
         }}
-        detailPanel={rowData =>{
+        onRowClick={(event, rowData) => {
+          setSelectedRowId(rowData.id);
+        }}
+        detailPanel={(rowData) =>{
           return(
             <>
-            <div style={{marginRight: 10}}>
+            <div style={{marginTop: 20}}>
               
-              <Button variant='contained' onClick={() => handleButtonClick('student')} sx={{marginRight: 2}}>STUDENT INFORMATION</Button>
-              <Button variant='contained' onClick={() => handleButtonClick('subject')} sx={{marginRight: 2}}>SUBJECTS ENROLLED</Button>
-              <Button variant='contained' onClick={() => handleButtonClick('parents')} sx={{marginRight: 2}}>PARENT INFORMATION</Button>
-              <Button variant='contained' onClick={() => handleButtonClick('school')} >SCHOOL ATTENDED</Button>
+              <Button className={classes.root} variant='contained' onClick={() => handleButtonClick('student')} sx={{backgroundColor: activeTab === "student" ? '#3A302A' : "white", color: activeTab === "student" ? 'white' : "#3A302A", borderRadius: 0, width: "29.2rem", border: 1, borderColor:"#3A302A", borderRight: 0}}>STUDENT INFORMATION</Button>
+              <Button className={classes.root} variant='contained' onClick={() => handleButtonClick('subject')} sx={{backgroundColor: activeTab === "subject" ? '#3A302A' : "white", color: activeTab === "subject" ? 'white' : "#3A302A", borderRadius: 0, width: "29.2rem", border: 1, borderColor:"#3A302A", borderRight: 0}}>SUBJECTS ENROLLED</Button>
+              <Button className={classes.root} variant='contained' onClick={() => handleButtonClick('parents')} sx={{backgroundColor: activeTab === "parents" ? '#3A302A' : "white", color: activeTab === "parents" ? 'white' : "#3A302A", borderRadius: 0, width: "29.2rem", border: 1, borderColor:"#3A302A", borderRight: 0}}>PARENT INFORMATION</Button>
+              <Button className={classes.root} variant='contained' onClick={() => handleButtonClick('school')} sx={{backgroundColor: activeTab === "school" ? '#3A302A' : "white", color: activeTab === "school" ? 'white' : "#3A302A", borderRadius: 0, width: "29.2rem", border: 1, borderColor:"#3A302A"}} >SCHOOL ATTENDED</Button>
             </div>
+
+            
 
             {activeTab === 'student' && (
               <StudentInfo></StudentInfo>
