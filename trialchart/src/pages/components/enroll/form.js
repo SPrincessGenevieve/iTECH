@@ -21,6 +21,9 @@ import schedData from './../json/schedJSON.json'
 import Confirm from './Confirm';
 import { Button, Input, TextField } from '@mui/material';
 import Semester from './../json/Semester.json'
+import './table.css'
+import { FaTrashAlt } from 'react-icons/fa';
+
 
 
 export default function Form() {
@@ -124,7 +127,12 @@ export default function Form() {
       SeniorName, 
       SeniorAdd, 
       CollageName, 
-      CollegeAdd
+      CollegeAdd,
+      yearLevel: yearLevel,
+      semester: semester,
+      subject: selectedOptionSub,
+      faculty: selectedOptionFac,
+      schedule: selectedOptionSched
     };
     axios.post('http://localhost:3000/posts', data)
       .then(response => {
@@ -313,6 +321,10 @@ export default function Form() {
     setCollegeAdd(event.target.value);
   }
 
+  const handleYearLevelPost = (event) =>{
+    setCollegeAdd(event.target.value);
+  }
+
   const [yearLevel, setYearLevel] = useState(null);
   const [semester, setSemester] = useState(null);
   const [selectedOptionSub, setSelectedOptionSub] = useState(null);
@@ -329,9 +341,70 @@ export default function Form() {
       setOptionComProg(optionComProg)}
       else {
       setOptionFac([
-        { value: 'Dr. Smith', label: 'Dr. Smith', count: 0 },
-        { value: 'Prof. Johnson', label: 'Prof. Johnson', count: 0 },
-        { value: 'Ms. Davis', label: 'Ms. Davis', count: 0 },
+        
+{ value: 'Dr. Smith', label: 'Dr. Smith', count: 0 },
+{ value: 'Prof. Johnson', label: 'Prof. Johnson', count: 0 },
+{ value: 'Ms. Davis', label: 'Ms. Davis', count: 0 },
+{ value: 'Emanuel Jackson', label: 'Emanuel Jackson', count: 0 },
+{ value: 'Kathryn Lyons', label: 'Kathryn Lyons', count: 0 },
+{ value: 'Deanna Price', label: 'Deanna Price', count: 0 },
+{ value: 'Jaylen Hutchinson', label: 'Jaylen Hutchinson', count: 0 },
+{ value: 'Kaleigh Chambers', label: 'Kaleigh Chambers', count: 0 },
+{ value: 'William Berg', label: 'William Berg', count: 0 },
+{ value: 'Rohan Marsh', label: 'Rohan Marsh', count: 0 },
+{ value: 'Dillon Terrell', label: 'Dillon Terrell', count: 0 },
+{ value: 'Claire Nguyen', label: 'Claire Nguyen', count: 0 },
+{ value: 'Kailee Huffman', label: 'Kailee Huffman', count: 0 },
+{ value: 'Hayley Curry', label: 'Hayley Curry', count: 0 },
+{ value: 'Makena Huynh', label: 'Makena Huynh', count: 0 },
+{ value: 'Elliana Burton', label: 'Elliana Burton', count: 0 },
+{ value: 'Cara Mcdaniel', label: 'Cara Mcdaniel', count: 0 },
+{ value: 'Angelo Chavez', label: 'Angelo Chavez', count: 0 },
+{ value: 'Franklin Daugherty', label: 'Franklin Daugherty', count: 0 },
+{ value: 'Taylor Ingram', label: 'Taylor Ingram', count: 0 },
+{ value: 'Colin Glass', label: 'Colin Glass', count: 0 },
+{ value: 'Addisyn Sampson', label: 'Addisyn Sampson', count: 0 },
+{ value: 'Rachael Campos', label: 'Rachael Campos', count: 0 },
+{ value: 'Desiree Juarez', label: 'Desiree Juarez', count: 0 },
+{ value: 'Trystan Ashley', label: 'Trystan Ashley', count: 0 },
+{ value: 'Elvis Downs', label: 'Elvis Downs', count: 0 },
+{ value: 'Naomi French', label: 'Naomi French', count: 0 },
+{ value: 'Franklin Daugherty', label: 'Franklin Daugherty', count: 0 },
+{ value: 'Taylor Ingram', label: 'Taylor Ingram', count: 0 },
+{ value: 'Colin Glass', label: 'Colin Glass', count: 0 },
+{ value: 'Addisyn Sampson', label: 'Addisyn Sampson', count: 0 },
+{ value: 'Rachael Campos', label: 'Rachael Campos', count: 0 },
+{ value: 'Desiree Juarez', label: 'Desiree Juarez', count: 0 },
+{ value: 'Trystan Ashley', label: 'Trystan Ashley', count: 0 },
+{ value: 'Elvis Downs', label: 'Elvis Downs', count: 0 },
+{ value: 'Naomi French', label: 'Naomi French', count: 0 },
+{ value: 'Dr. Smith', label: 'Dr. Smith', count: 0 },
+{ value: 'Prof. Johnson', label: 'Prof. Johnson', count: 0 },
+{ value: 'Ms. Davis', label: 'Ms. Davis', count: 0 },
+{ value: 'Emanuel Jackson', label: 'Emanuel Jackson', count: 0 },
+{ value: 'Kathryn Lyons', label: 'Kathryn Lyons', count: 0 },
+{ value: 'Deanna Price', label: 'Deanna Price', count: 0 },
+{ value: 'Jaylen Hutchinson', label: 'Jaylen Hutchinson', count: 0 },
+{ value: 'Kaleigh Chambers', label: 'Kaleigh Chambers', count: 0 },
+{ value: 'William Berg', label: 'William Berg', count: 0 },
+{ value: 'Dr. Smith', label: 'Dr. Smith', count: 0 },
+{ value: 'Prof. Johnson', label: 'Prof. Johnson', count: 0 },
+{ value: 'Ms. Davis', label: 'Ms. Davis', count: 0 },
+{ value: 'Jonas Peters', label: 'Jonas Peters', count: 0 },
+{ value: 'Colten Meadows', label: 'Colten Meadows', count: 0 },
+{ value: 'Laney Murray', label: 'Laney Murray', count: 0 },
+{ value: 'Haiden Goodwin', label: 'Haiden Goodwin', count: 0 },
+{ value: 'Kaleigh Chambers', label: 'Kaleigh Chambers', count: 0 },
+{ value: 'Luke Rios', label: 'Luke Rios', count: 0 },
+{ value: 'Mara Cross', label: 'Dr. Smith', count: 0 },
+{ value: 'Jessie Day', label: 'Prof. Johnson', count: 0 },
+{ value: 'Savanna Neal', label: 'Ms. Davis', count: 0 },
+{ value: 'Charity Mcgee', label: 'Jonas Peters', count: 0 },
+{ value: 'Colten Meadows', label: 'Colten Meadows', count: 0 },
+{ value: 'Laney Ponce', label: 'Laney Murray', count: 0 },
+{ value: 'Santiago Hopkins', label: 'Haiden Goodwin', count: 0 },
+{ value: 'Giovanny Abbott', label: 'Kaleigh Chambers', count: 0 },
+{ value: 'Kayla Joseph', label: 'Luke Rios', count: 0 }
       ]);
     }
     };
@@ -448,81 +521,170 @@ const optionSubjects = yearLevel && semester && yearLevel.value === 'First Year'
       :[]
     ;
 
-    const optionFaculty = listSubs && yearLevel && semester && listSubs.value === "Introduction to Computing" && yearLevel.value === 'First Year' && semester.value === 'First Semester'
-    ? [
-      { value: 'Introduction to Computing', label: 'Introduction to Computing' },
-      { value: 'Computer Programing 1', label: 'Computer Programing 1' },
-      { value: 'Purposive Communication', label: 'Purposive Communication' }
-      ]
-    : listSubs && yearLevel && semester && listSubs.value === "Computer Programing 1" && yearLevel.value === 'First Year' && semester.value === 'Second Semester'
-      ? [
-        { value: 'Computer Programing 2', label: 'Computer Programing 2' },
-        { value: 'Data Structures and Algorithms', label: 'Data Structures and Algorithms' },
-        { value: 'Discrete Mathematics', label: 'Discrete Mathematics' }
-        ]
-    : listSubs && yearLevel && semester && listSubs.value === "Purposive Communication" && yearLevel.value === 'Second Year' && semester.value === 'First Semester' 
-      ? [
-        { value: 'Intro to Human Computer Interaction', label: 'Intro to Human Computer Interaction' },
-        { value: 'Fundamentals of Database Systems', label: 'Computer Programing 2' },
-        { value: 'Platform Technologies', label: 'Platform Technologies' }
-      ]
-    : listSubs && yearLevel && semester && listSubs.value === "Introduction to Computing" && yearLevel.value === 'Second Year' && semester.value === 'Second Semester' 
-      ? [
-        { value: 'Information Management', label: 'Information Management' },
-        { value: 'Networking 1', label: 'Networking 1' },
-        { value: 'Web Systems and Technolgies', label: 'Web Systems and Technolgies' }
-      ]
-    : listSubs && yearLevel && semester && listSubs.value === "Introduction to Computing" && yearLevel.value === 'Third Year' && semester.value === 'First Semester' 
-      ? [
-        { value: 'Information Assurance and Security', label: 'Information Assurance and Security' },
-        { value: 'Computer Programing 1', label: 'Computer Programing 1' },
-        { value: 'Mobile Programming', label: '	Mobile Programming' }
-      ]
-    : listSubs && yearLevel && semester && listSubs.value === "Introduction to Computing" && yearLevel.value === 'Third Year' && semester.value === 'Second Semester' 
-      ? [
-        { value: 'CAPSTONE Project and Research 1', label: 'CAPSTONE Project and Research 1' },
-        { value: 'Integrative Programming and Technologies', label: 'Integrative Programming and Technologies' },
-        { value: 'Applications Development and Emerging Technologies', label: 'Applications Development and Emerging Technologies' }
-      ]
-    : listSubs && yearLevel && semester && listSubs.value === "Introduction to Computing" && yearLevel.value === 'Fourth Year' && semester.value === 'First Semester' 
-      ? [
-        { value: 'CAPSTONE Project and Research 2', label: 'CAPSTONE Project and Research 2' },
-        { value: 'System Administration and Maintenance', label: 'System Administration and Maintenance' },
-        { value: 'Social and Professional Issues', label: 'Social and Professional Issues' }
-      ]
-    : listSubs && yearLevel && semester && listSubs.value === "Introduction to Computing" && yearLevel.value === 'Fourth Year' && semester.value === 'Second Semester' 
-      ? [
-        { value: 'PRACTICUM(486 hrs.)', label: 'PRACTICUM(486 hrs.)', count: 0 },
-      ]
-      :[]
-    ;
+  
 
-const [listSubs, setListSubs] = useState([
-  { value: 'Introduction to Computing', label: 'Introduction to Computing' },
-  { value: 'Computer Programing 1', label: 'Computer Programing 1' },
-  { value: 'Purposive Communication', label: 'Purposive Communication' },
-  { value: 'Computer Programing 2', label: 'Computer Programing 2' },
-  { value: 'Data Structures and Algorithms', label: 'Data Structures and Algorithms' },
-  { value: 'Discrete Mathematics', label: 'Discrete Mathematics' },
-  { value: 'Discrete Mathematics', label: 'Discrete Mathematics' },
-  { value: 'Intro to Human Computer Interaction', label: 'Intro to Human Computer Interaction' },
-  { value: 'Fundamentals of Database Systems', label: 'Fundamentals of Database Systems' },
-  { value: 'Platform Technologies', label: 'Platform Technologies' },
-  { value: 'Information Management', label: 'Information Management' },
-  { value: 'Networking 1', label: 'Networking 1' },
-  { value: 'Web Systems and Technolgies', label: 'Web Systems and Technolgies' },
-  { value: 'Information Assurance and Security', label: 'Information Assurance and Security' },
-  { value: 'Computer Programing 1', label: 'Computer Programing 1' },
-  { value: 'Mobile Programming', label: '	Mobile Programming' },
-  { value: 'CAPSTONE Project and Research 1', label: 'CAPSTONE Project and Research 1' },
-  { value: 'Integrative Programming and Technologies', label: 'Integrative Programming and Technologies' },
-  { value: 'Applications Development and Emerging Technologies', label: 'Applications Development and Emerging Technologies' },
-  { value: 'CAPSTONE Project and Research 2', label: 'CAPSTONE Project and Research 2' },
-  { value: 'System Administration and Maintenance', label: 'System Administration and Maintenance' },
-  { value: 'Social and Professional Issues', label: 'Social and Professional Issues' }
+ 
+
+
+
+const [optionFacSub, setOptionFacSub] = useState([
+  {
+    label: "Introduction to Computing",
+    options: [
+      { value: 'Dr. Smith', label: 'Dr. Smith', count: 0 },
+      { value: 'Prof. Johnson', label: 'Prof. Johnson', count: 0 },
+      { value: 'Ms. Davis', label: 'Ms. Davis', count: 0 }
+    ]},
+    {
+    label: "Computer Programing 1",
+    options: [
+    { value: 'Emanuel Jackson', label: 'Emanuel Jackson', count: 0 },
+    { value: 'Kathryn Lyons', label: 'Kathryn Lyons', count: 0 },
+    { value: 'Deanna Price', label: 'Deanna Price', count: 0 },
+    ]},
+    {
+    label: "Purposive Communication",
+    options: [
+    { value: 'Jaylen Hutchinson', label: 'Jaylen Hutchinson', count: 0 },
+    { value: 'Kaleigh Chambers', label: 'Kaleigh Chambers', count: 0 },
+    { value: 'William Berg', label: 'William Berg', count: 0 },
+    ]},
+    {
+    label: "Data Structures and Algorithms",
+    options: [
+    { value: 'Rohan Marsh', label: 'Rohan Marsh', count: 0 },
+    { value: 'Dillon Terrell', label: 'Dillon Terrell', count: 0 },
+    { value: 'Claire Nguyen', label: 'Claire Nguyen', count: 0 },
+    ]},
+    {
+    label: "Discrete Mathematics",
+    options: [
+    { value: 'Kailee Huffman', label: 'Kailee Huffman', count: 0 },
+    { value: 'Hayley Curry', label: 'Hayley Curry', count: 0 },
+    { value: 'Makena Huynh', label: 'Makena Huynh', count: 0 },
+    ]},
+    {
+    label: "Intro to Human Computer Interaction",
+    options: [
+    { value: 'Elliana Burton', label: 'Elliana Burton', count: 0 },
+    { value: 'Cara Mcdaniel', label: 'Cara Mcdaniel', count: 0 },
+    { value: 'Angelo Chavez', label: 'Angelo Chavez', count: 0 },
+    ]},
+    {
+    label: "Fundamentals of Database Systems",
+    options: [
+    { value: 'Franklin Daugherty', label: 'Franklin Daugherty', count: 0 },
+    { value: 'Taylor Ingram', label: 'Taylor Ingram', count: 0 },
+    { value: 'Colin Glass', label: 'Colin Glass', count: 0 },
+    ]},
+    {
+    label: "Platform Technologies",
+    options: [
+    { value: 'Addisyn Sampson', label: 'Addisyn Sampson', count: 0 },
+    { value: 'Rachael Campos', label: 'Rachael Campos', count: 0 },
+    { value: 'Desiree Juarez', label: 'Desiree Juarez', count: 0 },
+    ]},
+    {
+    label: "Information Management",
+    options: [
+    { value: 'Trystan Ashley', label: 'Trystan Ashley', count: 0 },
+    { value: 'Elvis Downs', label: 'Elvis Downs', count: 0 },
+    { value: 'Naomi French', label: 'Naomi French', count: 0 },
+    ]},
+    {
+    label: "Networking 1",
+    options: [
+    { value: 'Franklin Daugherty', label: 'Franklin Daugherty', count: 0 },
+    { value: 'Taylor Ingram', label: 'Taylor Ingram', count: 0 },
+    { value: 'Colin Glass', label: 'Colin Glass', count: 0 },
+    ]},
+    {
+    label: "Web Systems and Technolgies",
+    options: [
+    { value: 'Addisyn Sampson', label: 'Addisyn Sampson', count: 0 },
+    { value: 'Rachael Campos', label: 'Rachael Campos', count: 0 },
+    { value: 'Desiree Juarez', label: 'Desiree Juarez', count: 0 },
+    ]},
+    {
+    label: "Information Assurance and Security",
+    options: [
+    { value: 'Trystan Ashley', label: 'Trystan Ashley', count: 0 },
+    { value: 'Elvis Downs', label: 'Elvis Downs', count: 0 },
+    { value: 'Naomi French', label: 'Naomi French', count: 0 },
+    ]},
+    {
+    label: "Networking 2",
+    options: [
+    { value: 'Dr. Smith', label: 'Dr. Smith', count: 0 },
+    { value: 'Prof. Johnson', label: 'Prof. Johnson', count: 0 },
+    { value: 'Ms. Davis', label: 'Ms. Davis', count: 0 },
+    ]},
+    {
+    label: "	Mobile Programming",
+    options: [
+    { value: 'Emanuel Jackson', label: 'Emanuel Jackson', count: 0 },
+    { value: 'Kathryn Lyons', label: 'Kathryn Lyons', count: 0 },
+    { value: 'Deanna Price', label: 'Deanna Price', count: 0 },
+    ]},
+    {
+    label: "CAPSTONE Project and Research 1",
+    options: [
+    { value: 'Jaylen Hutchinson', label: 'Jaylen Hutchinson', count: 0 },
+    { value: 'Kaleigh Chambers', label: 'Kaleigh Chambers', count: 0 },
+    { value: 'William Berg', label: 'William Berg', count: 0 },
+    ]},
+    {
+    label: "Integrative Programming and Technologies",
+    options: [
+    { value: 'Dr. Smith', label: 'Dr. Smith', count: 0 },
+    { value: 'Prof. Johnson', label: 'Prof. Johnson', count: 0 },
+    { value: 'Ms. Davis', label: 'Ms. Davis', count: 0 },
+    ]},
+    {
+    label: "Applications Development and Emerging Technologies",
+    options: [
+    { value: 'Jonas Peters', label: 'Jonas Peters', count: 0 },
+    { value: 'Colten Meadows', label: 'Colten Meadows', count: 0 },
+    { value: 'Laney Murray', label: 'Laney Murray', count: 0 },
+    ]},
+    {
+      label: "CAPSTONE Project and Research 2",
+      options: [
+        { value: 'Haiden Goodwin', label: 'Haiden Goodwin', count: 0 },
+        { value: 'Kaleigh Chambers', label: 'Kaleigh Chambers', count: 0 },
+        { value: 'Luke Rios', label: 'Luke Rios', count: 0 },
+      ]},
+      {
+      label: "System Administration and Maintenance",
+      options: [
+        { value: 'Mara Cross', label: 'Dr. Smith', count: 0 },
+        { value: 'Jessie Day', label: 'Prof. Johnson', count: 0 },
+        { value: 'Savanna Neal', label: 'Ms. Davis', count: 0 },
+      ]},
+      {
+      label: "Social and Professional Issues	",
+      options: [
+      { value: 'Jonas Peters', label: 'Jonas Peters', count: 0 },
+      { value: 'Colten Meadows', label: 'Colten Meadows', count: 0 },
+      { value: 'Laney Murray', label: 'Laney Murray', count: 0 },
+      ]},
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  { value: 'Santiago Hopkins', label: 'Haiden Goodwin', count: 0 },
+  { value: 'Giovanny Abbott', label: 'Kaleigh Chambers', count: 0 },
+  { value: 'Kayla Joseph', label: 'Luke Rios', count: 0 }
 ])
-
-
 
 
 //FIRST YEAR FIRST SEM
@@ -875,7 +1037,7 @@ const [optionSched41, setOptionSched41] = [
                               <SelectionSub  name="year"  className="year" value={yearLevel} options={yearlevelSelection} title="Year" onChange={setYearLevel}></SelectionSub>
                               <SelectionSub  name="semester"  className="semester" value={semester} options={semesterSelection} title="Semester" onChange={setSemester}></SelectionSub>
                               <SelectionSub  name="subject"  className="subject" value={selectedOptionSub} options={optionSubjects} title="Subject" onChange={handleSubjectChange}></SelectionSub>
-                              <SelectionSub  name="faculty"  className="faculty" value={selectedOptionFac}  options={optionFacIntroCom} title="Faculty" onChange={handleFacultyChange}></SelectionSub>
+                              <SelectionSub  name="faculty"  className="faculty" value={selectedOptionFac}  options={optionFacSub} title="Faculty" onChange={handleFacultyChange}></SelectionSub>
                               <SelectionSub  name="schedule" className="sched"  value={selectedOptionSched}  options={optionSched} title="Schedule" onChange={setSelectedOptionSched}></SelectionSub>
                               
                           </div>
@@ -883,8 +1045,8 @@ const [optionSched41, setOptionSched41] = [
                               <Button onClick={handleAddToTable} variant='contained'>Add</Button>
                           </div>
                         </div>
-                        <div>
-                          <h1>Subjects Enrolled</h1>
+                        <div style={{marginTop: "5rem", width:"90%", height: "10%", display:"flex", flexDirection:"column", alignItems:"center"}}>
+                          <h1 style={{marginBottom: 20}}>Subjects Enrolled</h1>
                           <table>
                             <thead>
                               <tr>
@@ -904,7 +1066,7 @@ const [optionSched41, setOptionSched41] = [
                                   <td>{data.subData}</td>
                                   <td>{data.facultyData}</td>
                                   <td>{data.schedData}</td>
-                                  <td><Button onClick={handleRemoveFromTable} variant='contained'>Remove</Button></td>
+                                  <td><Button style={{backgroundColor:"red", borderRadius: 50, paddingRight: 30}} endIcon={<FaTrashAlt/>} onClick={handleRemoveFromTable} variant='contained'></Button></td>
                                 </tr>
                               ))}
                             </tbody>
@@ -913,9 +1075,9 @@ const [optionSched41, setOptionSched41] = [
                       </div>  
                     </div>
 
-                  <div style={{display:"flex", flexDirection:"row", marginLeft: "73rem"}}>
+                  <div style={{display:"flex", flexDirection:"row", marginLeft: "73rem", marginTop: "15rem", paddingBottom:"2rem"}}>
                       <PropsBtn backgroundColor='red' props="CANCEL"></PropsBtn>
-                      <PropsBtn type="submit" onClick={() =>setShowTable(!showTable)} backgroundColor='#00B050' props="ENROLL STUDENT"></PropsBtn>
+                      <PropsBtn type="submit" onClick={() =>setShowTable(!showTable) & handleSubmit} backgroundColor='#00B050' props="ENROLL STUDENT"></PropsBtn>
                   </div>
                   
                 </div>
