@@ -205,7 +205,7 @@ const handleCancelEdit = () => {
   };
  
   const filteredData = data.filter(row =>
-  `${row.firstname} ${row.middlename} ${row.lastname}`
+  `${row.firstname} ${row.middlename} ${row.lastname} ${row.year}`
     .toLowerCase()
     .includes(searchTerm.toLowerCase())
 );
