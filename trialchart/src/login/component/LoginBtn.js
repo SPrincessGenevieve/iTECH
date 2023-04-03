@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './css/login.css'
 import RouterPage from '../../routerPage';
 
-function LoginBtn() {
+function LoginBtn({onclick}) {
   const navigation = useNavigate()
 
   function handleClick(){
@@ -12,7 +12,7 @@ function LoginBtn() {
 
     return (
       <body > 
-          <button className='login' onClick={handleClick}>Login</button>
+          <button className='login' onClick={onclick}>Login</button>
     </body>
 
       );

@@ -27,8 +27,6 @@ import { FaTrashAlt } from 'react-icons/fa';
 
 
 export default function Form() {
-  const [value, setValue] = React.useState();
-  const [show, setShow] =useState(false);
   const [showTable, setShowTable] = useState(false)
   
 
@@ -38,7 +36,6 @@ export default function Form() {
   const [Pic, setPic] = useState(false)
   const [PSA, setPSA] = useState(false)
 
-  const [enrollno, setenrollno] = useState('')
   const [studno, setstudno] = useState('')
   const [firstname, setFname] = useState('')
   const [lastname, setLname] = useState('')
@@ -79,6 +76,55 @@ export default function Form() {
   const [CollageName, setCollageName] = useState('')
   const [CollegeAdd, setCollegeAdd] = useState('')
   
+  const clearForm = () =>{
+    setCard(false)
+    setTOR(false)
+    setCOR(false)
+    setPic(false)
+    setPSA(false)
+    setstudno('');
+    setFname('');
+    setLname('');
+    setmiddlename('');
+    setyear('');
+    setbalance('');
+    setemail('');
+    setbday('');
+    setadd('');
+    setaperAdd('');
+    setpostal('');
+    setcontactno('');
+    setreligion('');
+    setgender('');
+    setstatus('');
+    setMlastname('');
+    setMfirstname('');
+    setMage('');
+    setMeducAttain('');
+    setMaddres('');
+    setMincome('');
+    setMEmail('');
+    setMContact('');
+    setPlastname('');
+    setPfirstname('');
+    setPage('');
+    setPeducAttain('');
+    setPaddres('');
+    setPincome('');
+    setPEmail('');
+    setPContact('');
+    setElemName('');
+    setElemAdd('');
+    setJunioName('');
+    setJuniorAdd('');
+    setSeniorName('');
+    setSeniorAdd('');
+    setCollageName('');
+    setCollegeAdd('');
+    setTableData([]);
+
+  }
+  
   const handleSubmit =(e) =>{
     e.preventDefault();
     const data = 
@@ -88,7 +134,6 @@ export default function Form() {
       COR,
       Pic,
       PSA,
-      enrollno, 
       studno, 
       firstname, 
       lastname, 
@@ -128,22 +173,19 @@ export default function Form() {
       SeniorAdd, 
       CollageName, 
       CollegeAdd,
-      yearLevel: yearLevel,
-      semester: semester,
-      subject: selectedOptionSub,
-      faculty: selectedOptionFac,
-      schedule: selectedOptionSched
+      subjectsEnrolled: tableData
     };
     axios.post('http://localhost:3000/posts', data)
       .then(response => {
         console.log(response);
+        clearForm();
       })
       .catch(error => {
         console.log(error);
       });
-    
   }
 
+ 
   const handleCard = (event) =>{
     setCard(event.target.value);
   }
@@ -164,9 +206,6 @@ export default function Form() {
     setPSA(event.target.value);
   }
  
-  const handleenrollno = (event) =>{
-    setenrollno(event.target.value);
-  }
 
   const handlestudno = (event) =>{
     setstudno(event.target.value);
@@ -230,6 +269,9 @@ export default function Form() {
 
   const handleMlastname = (event) =>{
     setMlastname(event.target.value);
+  }
+  const handleMfirstname = (event) =>{
+    setMfirstname(event.target.value);
   }
 
   const handleMage = (event) =>{
@@ -648,42 +690,37 @@ const [optionFacSub, setOptionFacSub] = useState([
     { value: 'Laney Murray', label: 'Laney Murray', count: 0 },
     ]},
     {
-      label: "CAPSTONE Project and Research 2",
+    label: "CAPSTONE Project and Research 2",
+    options: [
+      { value: 'Haiden Goodwin', label: 'Haiden Goodwin', count: 0 },
+      { value: 'Kaleigh Chambers', label: 'Kaleigh Chambers', count: 0 },
+      { value: 'Luke Rios', label: 'Luke Rios', count: 0 },
+    ]},
+    {
+    label: "System Administration and Maintenance",
+    options: [
+      { value: 'Mara Cross', label: 'Dr. Smith', count: 0 },
+      { value: 'Jessie Day', label: 'Prof. Johnson', count: 0 },
+      { value: 'Savanna Neal', label: 'Ms. Davis', count: 0 },
+    ]},
+    {
+    label: "Social and Professional Issues	",
+    options: [
+    { value: 'Jonas Peters', label: 'Jonas Peters', count: 0 },
+    { value: 'Colten Meadows', label: 'Colten Meadows', count: 0 },
+    { value: 'Laney Murray', label: 'Laney Murray', count: 0 },
+    ]},
+
+    {
+      label: "PRACTICUM(486 hrs.)",
       options: [
-        { value: 'Haiden Goodwin', label: 'Haiden Goodwin', count: 0 },
-        { value: 'Kaleigh Chambers', label: 'Kaleigh Chambers', count: 0 },
-        { value: 'Luke Rios', label: 'Luke Rios', count: 0 },
-      ]},
-      {
-      label: "System Administration and Maintenance",
-      options: [
-        { value: 'Mara Cross', label: 'Dr. Smith', count: 0 },
-        { value: 'Jessie Day', label: 'Prof. Johnson', count: 0 },
-        { value: 'Savanna Neal', label: 'Ms. Davis', count: 0 },
-      ]},
-      {
-      label: "Social and Professional Issues	",
-      options: [
-      { value: 'Jonas Peters', label: 'Jonas Peters', count: 0 },
-      { value: 'Colten Meadows', label: 'Colten Meadows', count: 0 },
-      { value: 'Laney Murray', label: 'Laney Murray', count: 0 },
+        { value: 'Santiago Hopkins', label: 'Haiden Goodwin', count: 0 },
+        { value: 'Giovanny Abbott', label: 'Kaleigh Chambers', count: 0 },
+        { value: 'Kayla Joseph', label: 'Luke Rios', count: 0 }
       ]},
 
-  
-  
-  
-  
-  
-  
-  
 
   
-
-  
-
-  { value: 'Santiago Hopkins', label: 'Haiden Goodwin', count: 0 },
-  { value: 'Giovanny Abbott', label: 'Kaleigh Chambers', count: 0 },
-  { value: 'Kayla Joseph', label: 'Luke Rios', count: 0 }
 ])
 
 
@@ -941,50 +978,48 @@ const [optionSched41, setOptionSched41] = [
               </div>
 
               <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                  <div><InputBoxFinal disabled onChange={handleenrollno} label="Enrollment No."/></div>
-                  <div><InputBoxFinal onChange={handlestudno} label="Student No."/> </div>    
+                  <div><InputBoxFinal onChange={handlestudno} label="Student No."/> </div>
+                  <div><InputBoxFinal onChange={handlebalance} type="number" label="Balance"/></div>
               </div>
 
               <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                  <div><InputBoxFinal onChange={handlebalance} type="number" label="Balance"/></div>
+                  <div><InputBoxFinal onChange={handleLnameChange} label="Last name"/></div>
+                  <div><InputBoxFinal onChange={handleFnameChange} label="First name"/> </div> 
+              </div>
+              <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
+                  <div><InputBoxFinal onChange={handlemiddlename} label="Middle Name"/></div>  
                   <div><SelectionForm onChange={handleyear} label="Year Level" Label="Year Level" data={YearLevel}></SelectionForm></div>
               </div>
-              
               <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                  <div><InputBoxFinal onChange={handleLnameChange} label="Last name"/></div>
-                  <div><InputBoxFinal onChange={handleFnameChange} label="First name"/> </div>    
-              </div>
-              
-              <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                  <div><InputBoxFinal onChange={handlemiddlename} label="Middle Name"/></div>
                   <div><InputBoxFinal onChange={handleemail} label="Email Address"/></div>
+                  <div><InputBoxFinal onChange={handlebday} label="Birthday" id="date" type="date" InputLabelProps={{shrink: true}}/></div>
               </div>
                                   
               <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                  <div><InputBoxFinal onChange={handlebday} label="Birthday" id="date" type="date" InputLabelProps={{shrink: true}}/></div>
                   <div><InputBoxFinal onChange={handleAdd} label="Address"/></div>
+                  <div><InputBoxFinal onChange={handleperAdd} label="Permanent Address"/></div>
               </div>
 
               <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                  <div><InputBoxFinal onChange={handleperAdd} label="Permanent Address"/></div>
                   <div><InputBoxFinal onChange={handlepostalcode} label="Postal Code"/></div>
-              </div>
-              
-              <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
                   <div><InputBoxFinal onChange={handlecontactno} type="number" label="Contact Number"/></div>
-                  <div><SelectionForm onChange={handlereligion} label="Religion" Label="Religion" data={Religion}/></div>
               </div>
               
               <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                  <div><SelectionForm onChange={handlegender} label="Gender" Label="Gender" data={Gender}/></div>
-                  <div style={{marginLeft:10}}>
+                  
+                  <div><SelectionForm onChange={handlereligion} label="Religion" Label="Religion" data={Religion}/></div>
+                  <div style={{marginLeft: 10,}}><SelectionForm onChange={handlegender} label="Gender" Label="Gender" data={Gender}/></div>
+              </div>
+              
+              <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
+                  <div >
                     <SelectionForm onChange={handlestatus} label="Status" Label="Status" data={Status}></SelectionForm>
                   </div>
               </div>
                     </>
             </div>
                   <MaternalInfo 
-                  parentalFName ={handlePfirstname}
+                  parentalFName ={handleMfirstname}
                   parentalLName ={handleMlastname}
                   parentalAge ={handleMage}
                   parentalEducAttain ={handleMeducAttain}

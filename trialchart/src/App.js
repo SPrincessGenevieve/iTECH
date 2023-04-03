@@ -23,6 +23,7 @@ function App() {
             <Route path="/enroll" element={<Enroll />} />
             <Route path="/enrollees" element={<Enrollees />} />
             <Route path="/profile" element={<Profiles />} />
+           
         </Routes>
       </div>
 
