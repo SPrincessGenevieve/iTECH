@@ -22,7 +22,8 @@ import Confirm from './Confirm';
 import { Button, Input, TextField } from '@mui/material';
 import Semester from './../json/Semester.json'
 import './table.css'
-import { FaTrashAlt } from 'react-icons/fa';
+import { FaTrashAlt, FaArrowUp, FaArrowDown } from 'react-icons/fa';
+
 
 
 
@@ -500,6 +501,28 @@ export default function Form() {
     // Add removed option back to options list
     setOptionSub([...optionSub, { value: removedOption.subData, label: removedOption.subData }]);
   };
+
+  const [isVisible, setIsVisible] = useState(false);
+
+  function handleScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    setIsVisible(scrollTop > 500);
+  }
+
+  function handleClickUp() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function handleClickDown() {
+    window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  
   
 
   const [yearlevelSelection, setyearlevelSelection] = useState ([
@@ -976,6 +999,15 @@ const [optionSched41, setOptionSched41] = [
                   <div><CheckBoxes value={COR} onChange={handleCOR} label="COR/ Previous School ID"></CheckBoxes></div>
                   <div><CheckBoxes value={Pic} onChange={handlePic} label="2x2 Picture"></CheckBoxes></div>
               </div>
+              <div style={{display:"flex", position:"absolute", marginTop:"-5rem", marginLeft: "102rem"}}>
+                    <div style={{backgroundColor:"#ddd", width: "3rem", height:"3rem", borderRadius: 30}}>
+                      <Button 
+                        onClick={handleClickDown}
+                        style={{ display: 'block',  marginLeft:"-13px", marginTop: 7, borderRadius: 50 }}
+                        endIcon={<FaArrowDown/>}
+                      />
+                    </div>
+                  </div>
 
               <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
                   <div><InputBoxFinal value={studno} onChange={handlestudno} label="Student No."/> </div>
@@ -1130,6 +1162,16 @@ const [optionSched41, setOptionSched41] = [
                       <PropsBtn backgroundColor='red' onClick={clearForm} props="CANCEL"></PropsBtn>
                       <PropsBtn type="submit" onClick={() =>setShowTable(!showTable) & handleSubmit} backgroundColor='#00B050' props="ENROLL STUDENT"></PropsBtn>
                   </div>
+                  <div style={{display:"flex", position:"absolute", marginTop:"-10rem", marginLeft: "102rem"}}>
+                    <div style={{backgroundColor:"#ddd", width: "3rem", height:"3rem", borderRadius: 30}}>
+                      <Button
+                        onClick={handleClickUp}
+                        style={{ display: isVisible ? 'block' : 'none', marginLeft:"-13px", marginTop: 7, borderRadius: 50}}
+                        endIcon={<FaArrowUp/>}
+                      ></Button>
+                    </div>
+                  </div>
+                  
                   
                 </div>
               </form>
