@@ -9,12 +9,16 @@ table {
     padding: 12px 15px;
     text-align: left;
     text-align: center;
+    padding-left: 7rem;
+    padding-right: 7rem;
   }
   
   tbody td {
     border-bottom: 1px solid #ddd;
     padding: 12px 15px;
     text-align: left;
+    
+    
   }
   
   tbody td:last-child {
@@ -32,4 +36,22 @@ table {
     font-size: 14px;
     border-radius: 4px;
     cursor: pointer;
+  }
+  .tableDesign{
+    margin-top: 5rem;
+    width: 78%;
+    height: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    transition: 0.5s;
+    padding-top: 2rem;
+    padding-bottom: 5rem; 
+    margin-left: 5rem;
+  }
+  
+  .tableDesign:hover{
+
   }

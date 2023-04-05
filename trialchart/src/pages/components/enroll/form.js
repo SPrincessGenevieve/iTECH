@@ -76,7 +76,7 @@ export default function Form() {
   const [CollageName, setCollageName] = useState('')
   const [CollegeAdd, setCollegeAdd] = useState('')
   
-  const clearForm = () =>{
+  const clearForm = () => {
     setCard(false)
     setTOR(false)
     setCOR(false)
@@ -122,7 +122,6 @@ export default function Form() {
     setCollageName('');
     setCollegeAdd('');
     setTableData([]);
-
   }
   
   const handleSubmit =(e) =>{
@@ -968,52 +967,52 @@ const [optionSched41, setOptionSched41] = [
                 <div>
 
                     <>
-              <div  style={{display:"flex", flexDirection:"row", marginLeft: 50}}>
+              <div  style={{display:"flex", flexDirection:"row", marginLeft: 50, marginTop: 50}}>
                   
-                  <div><CheckBoxes onChange={handlePSA} label="PSA/NSO"></CheckBoxes></div>
-                  <div><CheckBoxes onChange={handleCard} label="Form 138/ Report Card"></CheckBoxes></div>
-                  <div><CheckBoxes onChange={handleTOR} label="TOR"></CheckBoxes></div>
-                  <div><CheckBoxes onChange={handleCOR} label="COR/ Previous School ID"></CheckBoxes></div>
-                  <div><CheckBoxes onChange={handlePic} label="2x2 Picture"></CheckBoxes></div>
+                  <div><CheckBoxes value={PSA} onChange={handlePSA} label="PSA/NSO"></CheckBoxes></div>
+                  <div><CheckBoxes value={Card} onChange={handleCard} label="Form 138/ Report Card"></CheckBoxes></div>
+                  <div><CheckBoxes value={TOR} onChange={handleTOR} label="TOR"></CheckBoxes></div>
+                  <div><CheckBoxes value={COR} onChange={handleCOR} label="COR/ Previous School ID"></CheckBoxes></div>
+                  <div><CheckBoxes value={Pic} onChange={handlePic} label="2x2 Picture"></CheckBoxes></div>
               </div>
 
               <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                  <div><InputBoxFinal onChange={handlestudno} label="Student No."/> </div>
-                  <div><InputBoxFinal onChange={handlebalance} type="number" label="Balance"/></div>
+                  <div><InputBoxFinal value={studno} onChange={handlestudno} label="Student No."/> </div>
+                  <div><InputBoxFinal value={balance} onChange={handlebalance} type="number" label="Balance"/></div>
               </div>
 
               <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                  <div><InputBoxFinal onChange={handleLnameChange} label="Last name"/></div>
-                  <div><InputBoxFinal onChange={handleFnameChange} label="First name"/> </div> 
+                  <div><InputBoxFinal value={lastname} onChange={handleLnameChange} label="Last name"/></div>
+                  <div><InputBoxFinal value={firstname} onChange={handleFnameChange} label="First name"/> </div> 
               </div>
               <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                  <div><InputBoxFinal onChange={handlemiddlename} label="Middle Name"/></div>  
-                  <div><SelectionForm onChange={handleyear} label="Year Level" Label="Year Level" data={YearLevel}></SelectionForm></div>
+                  <div><InputBoxFinal value={middlename} onChange={handlemiddlename} label="Middle Name"/></div>  
+                  <div><SelectionForm value={year} onChange={handleyear} label="Year Level" Label="Year Level" data={YearLevel}></SelectionForm></div>
               </div>
               <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                  <div><InputBoxFinal onChange={handleemail} label="Email Address"/></div>
-                  <div><InputBoxFinal onChange={handlebday} label="Birthday" id="date" type="date" InputLabelProps={{shrink: true}}/></div>
+                  <div><InputBoxFinal value={email} onChange={handleemail} label="Email Address"/></div>
+                  <div><InputBoxFinal value={bday} onChange={handlebday} label="Birthday" id="date" type="date" InputLabelProps={{shrink: true}}/></div>
               </div>
                                   
               <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                  <div><InputBoxFinal onChange={handleAdd} label="Address"/></div>
-                  <div><InputBoxFinal onChange={handleperAdd} label="Permanent Address"/></div>
+                  <div><InputBoxFinal value={address} onChange={handleAdd} label="Address"/></div>
+                  <div><InputBoxFinal value={perAdd} onChange={handleperAdd} label="Permanent Address"/></div>
               </div>
 
               <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
-                  <div><InputBoxFinal onChange={handlepostalcode} label="Postal Code"/></div>
-                  <div><InputBoxFinal onChange={handlecontactno} type="number" label="Contact Number"/></div>
+                  <div><InputBoxFinal value={postalcode} onChange={handlepostalcode} label="Postal Code"/></div>
+                  <div><InputBoxFinal value={contactno} onChange={handlecontactno} type="number" label="Contact Number"/></div>
               </div>
               
               <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
                   
-                  <div><SelectionForm onChange={handlereligion} label="Religion" Label="Religion" data={Religion}/></div>
-                  <div style={{marginLeft: 10,}}><SelectionForm onChange={handlegender} label="Gender" Label="Gender" data={Gender}/></div>
+                  <div><SelectionForm value={religion} onChange={handlereligion} label="Religion" Label="Religion" data={Religion}/></div>
+                  <div style={{marginLeft: 10,}}><SelectionForm value={gender} onChange={handlegender} label="Gender" Label="Gender" data={Gender}/></div>
               </div>
               
               <div style={{display:"flex", flexDirection:"row", marginLeft: 10, marginTop: 30}}>
                   <div >
-                    <SelectionForm onChange={handlestatus} label="Status" Label="Status" data={Status}></SelectionForm>
+                    <SelectionForm value={status} onChange={handlestatus} label="Status" Label="Status" data={Status}></SelectionForm>
                   </div>
               </div>
                     </>
@@ -1028,6 +1027,14 @@ const [optionSched41, setOptionSched41] = [
                   parentalEmail ={handleMEmail}
                   parentalContact ={handleMContact}
                   title="Maternal Information" 
+                  valueFName ={Mfirstname}
+                  valueLName ={Mlastname}
+                  valueAge ={Mage}
+                  valueEducAttain ={MeducAttain}
+                  valueAdd ={Maddres}
+                  valueIncome ={Mincome}
+                  valueEmail ={MEmail}
+                  valueContact ={MContact}
                   />
 
                   <PaternalInfo 
@@ -1040,18 +1047,26 @@ const [optionSched41, setOptionSched41] = [
                   parentalEmail ={handlePEmail}
                   parentalContact ={handlePContact}
                   title="Paternal Information" 
+                  valueFName ={Pfirstname}
+                  valueLName ={Plastname}
+                  valueAge ={Page}
+                  valueEducAttain ={PeducAttain}
+                  valueAdd ={Paddres}
+                  valueIncome ={Pincome}
+                  valueEmail ={PEmail}
+                  valueContact ={PContact}
 
                   />
                   <div style={{marginLeft: 46, marginTop: 50}}>
                       <text style={{fontSize: 30}}>Schools Attended by the Applicant</text>
                   </div>
                   <div style={{display:"flex", flexDirection:"row", marginBottom: -20}}>
-                      <SchoolAttended onChangeName={handleElemName} onChangeAdd={handleElemAdd} label1="School name" label2="Address" title="ELEMENTARY"></SchoolAttended>
-                      <SchoolAttended onChangeName={handleJunioName} onChangeAdd={handleJuniorAdd} label1="School name" label2="Address" title="JUNIOR HIGH SCHOOL"></SchoolAttended>
+                      <SchoolAttended value1={ElemName} value2={ElemAdd} onChangeName={handleElemName} onChangeAdd={handleElemAdd} label1="School name" label2="Address" title="ELEMENTARY"></SchoolAttended>
+                      <SchoolAttended value1={JunioName} value2={JuniorAdd}  onChangeName={handleJunioName} onChangeAdd={handleJuniorAdd} label1="School name" label2="Address" title="JUNIOR HIGH SCHOOL"></SchoolAttended>
                   </div>
                   <div style={{display:"flex", flexDirection:"row"}}>
-                      <SchoolAttended onChangeName={handleSeniorName} onChangeAdd={handleSeniorAdd} label1="School name" label2="Address" title="SENIOR JUNIOR HIGH SCHOOL"></SchoolAttended>
-                      <SchoolAttended onChangeName={handleCollageName} onChangeAdd={handleCollegeAdd} label1="School name" label2="Address" title="COLLEGE"></SchoolAttended>
+                      <SchoolAttended value1={SeniorName} value2={SeniorAdd} onChangeName={handleSeniorName} onChangeAdd={handleSeniorAdd} label1="School name" label2="Address" title="SENIOR JUNIOR HIGH SCHOOL"></SchoolAttended>
+                      <SchoolAttended value1={CollageName} value2={CollegeAdd} onChangeName={handleCollageName} onChangeAdd={handleCollegeAdd} label1="School name" label2="Address" title="COLLEGE"></SchoolAttended>
                   </div>
 
                   <div className='inner'>
@@ -1080,7 +1095,7 @@ const [optionSched41, setOptionSched41] = [
                               <Button onClick={handleAddToTable} variant='contained'>Add</Button>
                           </div>
                         </div>
-                        <div style={{marginTop: "5rem", width:"90%", height: "10%", display:"flex", flexDirection:"column", alignItems:"center"}}>
+                        <div className='tableDesign'>
                           <h1 style={{marginBottom: 20}}>Subjects Enrolled</h1>
                           <table>
                             <thead>
@@ -1110,8 +1125,8 @@ const [optionSched41, setOptionSched41] = [
                       </div>  
                     </div>
 
-                  <div style={{display:"flex", flexDirection:"row", marginLeft: "73rem", marginTop: "15rem", paddingBottom:"2rem"}}>
-                      <PropsBtn backgroundColor='red' props="CANCEL"></PropsBtn>
+                  <div style={{display:"flex", flexDirection:"row", marginLeft: "73rem", marginTop: "5rem", paddingBottom:"2rem"}}>
+                      <PropsBtn backgroundColor='red' onClick={clearForm} props="CANCEL"></PropsBtn>
                       <PropsBtn type="submit" onClick={() =>setShowTable(!showTable) & handleSubmit} backgroundColor='#00B050' props="ENROLL STUDENT"></PropsBtn>
                   </div>
                   

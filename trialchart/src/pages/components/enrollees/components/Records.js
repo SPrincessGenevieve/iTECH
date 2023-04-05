@@ -94,11 +94,12 @@ function Record() {
   const [newCollageName, setnewCollageName] = useState("");
   const [newCollegeAdd, setnewCollegeAdd] = useState("");
 
-  const isTORChecked = row.TOR ==="on"
-  const isCardChecked = row.Card ==="on"
-  const isCORChecked = row.COR ==="on"
-  const isPicChecked = row.Pic ==="on"
-  const isPSAChecked = row.PSA ==="on"
+  const isTORChecked = row.TOR === true || row.TOR === "on";
+  const isCardChecked = row.Card === true || row.Card === "on";
+  const isCORChecked = row.COR === true || row.COR === "on";
+  const isPicChecked = row.Pic === true || row.Pic === "on";
+  const isPSAChecked = row.PSA === true || row.PSA === "on";
+  
 
 
 
@@ -431,19 +432,19 @@ const handleCancelEdit = () => {
                         <div style={{marginLeft: "30rem", marginTop: "2rem"}}>
                           <div style={{display:"flex", flexDirection:"row", marginLeft: "10rem", marginBottom:"2rem"}}>
                               <div style={{marginRight: 30}}>
-                                <CheckBox value={isCardChecked} checked={isCardChecked} disabled label="Card"></CheckBox>
+                                <CheckBox checked={row.PSA}  disabled label="PSA/NSO"></CheckBox>
                               </div>
                               <div style={{marginRight: 30}}>
-                                <CheckBox value={isTORChecked} checked={isTORChecked} disabled label="TOR"></CheckBox>
+                                <CheckBox checked={row.Card}  disabled label="Card"></CheckBox>
                               </div>
                               <div style={{marginRight: 30}}>
-                                <CheckBox value={isCORChecked} checked={isCORChecked} disabled label="COR"></CheckBox>
+                                <CheckBox checked={row.TOR} disabled label="TOR"></CheckBox>
                               </div>
                               <div style={{marginRight: 30}}>
-                                <CheckBox value={isPicChecked} checked={isTORChecked} disabled label="Pic"></CheckBox>
+                                <CheckBox checked={row.COR} disabled label="COR"></CheckBox>
                               </div>
                               <div style={{marginRight: 30}}>
-                                <CheckBox value={isPSAChecked} checked={isTORChecked} disabled label="PSA"></CheckBox>
+                                <CheckBox checked={row.Pic} disabled label="2x2 Picture"></CheckBox>
                               </div>
                             </div>
                           <div style={{flexDirection:"row", display:"flex"}}>
