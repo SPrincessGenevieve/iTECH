@@ -496,10 +496,11 @@ export default function Form() {
     const removedOption = newData.splice(index, 1)[0];
   
     setTableData(newData);
-    
+  
     // Add removed option back to options list
     setOptionSub([...optionSub, { value: removedOption.subData, label: removedOption.subData }]);
   };
+  
 
   const [yearlevelSelection, setyearlevelSelection] = useState ([
     {value: 'First Year', label: 'First Year'},
@@ -1109,14 +1110,14 @@ const [optionSched41, setOptionSched41] = [
                               </tr>
                             </thead>
                             <tbody>
-                              {tableData.map((data) => (
+                              {tableData.map((data, index) => (
                                 <tr key={data}>
                                   <td>{data.YearLevel}</td>
                                   <td>{data.Semester}</td>
                                   <td>{data.subData}</td>
                                   <td>{data.facultyData}</td>
                                   <td>{data.schedData}</td>
-                                  <td><Button style={{backgroundColor:"red", borderRadius: 50, paddingRight: 30}} endIcon={<FaTrashAlt/>} onClick={handleRemoveFromTable} variant='contained'></Button></td>
+                                  <td><Button style={{backgroundColor:"red", borderRadius: 50, paddingRight: 30}} endIcon={<FaTrashAlt/>} onClick={() => handleRemoveFromTable(index)} variant='contained'></Button></td>
                                 </tr>
                               ))}
                             </tbody>
