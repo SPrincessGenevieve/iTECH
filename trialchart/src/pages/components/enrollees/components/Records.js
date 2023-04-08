@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Navbar from '../../../../Navbar';
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper, Button, TextField } from '@material-ui/core';
 import { Edit, Delete, KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
@@ -6,6 +6,12 @@ import { makeStyles } from '@material-ui/core';
 import axios from 'axios';
 import TextFieldProps from '../TextFieldProps';
 import CheckBox from '../../enroll/finalForm/components/CheckBoxes';
+import { Download } from '@mui/icons-material';
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import logo from "./../../../../Images/logoDark.png"
+import './css.css'
+
 
 const useStyles = makeStyles({
   root: {
@@ -45,6 +51,9 @@ function Record() {
 
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [tableData, setTableData] = useState([])
+  const tableRef = useRef();
+
 
   const classes = useStyles();
   const [activeTab, setActiveTab] = useState('student');
@@ -349,9 +358,124 @@ const handleCancelEdit = () => {
   };
   
 
+  const [people, setPeople] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/posts")
+      .then((response) => response.json())
+      .then((data) => setPeople(data));
+  }, []);
 
 
 
+
+  const handleDownloadPDF = (id) => {
+    const selectedPerson = people.find((person) => person.id === id);
+  
+    if (!selectedPerson) {
+      console.log("Person not found");
+      return;
+    }
+  
+    const doc = new jsPDF({
+      orientation: "landscape",
+      unit: "pt",
+      format: "a4",
+    });
+  
+    const imagePromise = new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        resolve(img);
+      };
+      img.onerror = reject;
+      img.src = logo;
+    });
+  
+    imagePromise.then((img) => {
+      doc.addImage(img, "PNG", 250, 10, 320, 150);
+      doc.setFontSize(17);
+      doc.text(`CERTIFICATE OF REGISTRATION`, 270, 150, {styles: {textColor: [255, 0, 0]}});
+      doc.autoTable({
+        startY: 200,
+        head: [['Student No', 'Name', 'Year', 'Balance']],
+        body: [[
+          selectedPerson.studno,
+          `${selectedPerson.firstname} ${selectedPerson.middlename} ${selectedPerson.lastname}`,
+          selectedPerson.year,
+          `${selectedPerson.balance}`,
+        ]],
+        margin: { top: 70, right: 30, bottom: 30, left: 30 },
+        styles: {
+          cellPadding: 10,
+          fontSize: 7,
+          valign: "left",
+          halign: "left",
+        },
+        headStyles: {
+          fillColor: "#170a0a",
+          textColor: 255,
+          fontSize: 10,
+          halign: "left",
+          cellPadding: 10
+        },
+        columnStyles: {
+          0: { halign: "left" },
+          1: { halign: "left" },
+          2: { halign: "left" },
+          3: { halign: "left" },
+        },
+      });
+
+      // Modify the URL to include the selected ID
+      const url = `http://localhost:3000/posts/${selectedPerson.id}`;
+  
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          const subjectsEnrolled = data.subjectsEnrolled;
+          doc.setFontSize(17);
+          doc.text(`ENROLLED SUBJECTS`, 30, 310);
+          doc.autoTable({
+            startY: 320,
+            head: [["Year Level", "Semester", "Subject", "Faculty", "Schedule"]],
+            body: subjectsEnrolled.map((subject) => [
+              subject.YearLevel,
+              subject.Semester,
+              subject.subData,
+              subject.facultyData,
+              subject.schedData,
+            ]),
+            margin: { top: 70, right: 30, bottom: 30, left: 30 },
+            styles: {
+              cellPadding: 10,
+              fontSize: 7,
+              valign: "left",
+              halign: "left",
+            },
+            headStyles: {
+              fillColor: "#170a0a",
+              textColor: 255,
+              fontSize: 10,
+              halign: "left",
+              cellPadding: 10,
+            },
+            columnStyles: {
+              0: { halign: "left" },
+              1: { halign: "left" },
+              2: { halign: "left" },
+              3: { halign: "left" },
+              4: { halign: "left" },
+            },
+          });
+          doc.save(`enrolled_student_${selectedPerson.studno}.pdf`);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
+  };
+  
 
 
 
@@ -411,6 +535,9 @@ const handleCancelEdit = () => {
                         </Button>
                         <Button onClick={() => handleDelete(row)}>
                           <Delete />
+                        </Button>
+                        <Button onClick={() => handleDownloadPDF(row.id)}>
+                          <Download />
                         </Button>
                         <KeyboardArrowDown onClick={() => toggleDetails(row.studno)} />
                       </TableCell>

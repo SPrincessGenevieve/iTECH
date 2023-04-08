@@ -127,6 +127,63 @@ export default function Form() {
   
   const handleSubmit =(e) =>{
     e.preventDefault();
+
+    if (
+      !PSA 
+      || !Card 
+      || !TOR 
+      || !COR 
+      || !Pic 
+      || !studno 
+      || !lastname 
+      || !firstname 
+      || !middlename
+      || !year
+      || !balance
+      || !email
+      || !bday
+      || !address
+      || !perAdd
+      || !postalcode
+      || !contactno
+      || !religion
+      || !gender
+      || !status
+      || !Mlastname
+      || !Mfirstname
+      || !Mage
+      || !MeducAttain
+      || !Maddres
+      || !Mincome
+      || !MEmail
+      || !MContact
+      || !Plastname
+      || !Pfirstname
+      || !Page
+      || !PeducAttain
+      || !Paddres
+      || !Pincome
+      || !PEmail
+      || !PContact
+      || !ElemName
+      || !ElemAdd
+      || !JunioName
+      || !JuniorAdd
+      || !SeniorName
+      || !SeniorAdd
+      || !CollageName
+      || !CollegeAdd
+      ) {
+      alert('Please fill all required fields');
+      return;
+    }
+
+    if (tableData.length === 0) {
+      alert('Please add at least one subject.');
+      return;
+    }
+
+
     const data = 
     {
       Card,
@@ -175,6 +232,7 @@ export default function Form() {
       CollegeAdd,
       subjectsEnrolled: tableData
     };
+    setShowTable(true);
     axios.post('http://localhost:3000/posts', data)
       .then(response => {
         console.log(response);
@@ -1160,7 +1218,7 @@ const [optionSched41, setOptionSched41] = [
 
                   <div style={{display:"flex", flexDirection:"row", marginLeft: "73rem", marginTop: "5rem", paddingBottom:"2rem"}}>
                       <PropsBtn backgroundColor='red' onClick={clearForm} props="CANCEL"></PropsBtn>
-                      <PropsBtn type="submit" onClick={() =>setShowTable(!showTable) & handleSubmit} backgroundColor='#00B050' props="ENROLL STUDENT"></PropsBtn>
+                      <PropsBtn type="submit" onClick={() =>handleSubmit} backgroundColor='#00B050' props="ENROLL STUDENT"></PropsBtn>
                   </div>
                   <div style={{display:"flex", position:"absolute", marginTop:"-10rem", marginLeft: "102rem"}}>
                     <div style={{backgroundColor:"#ddd", width: "3rem", height:"3rem", borderRadius: 30}}>
