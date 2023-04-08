@@ -183,6 +183,21 @@ export default function Form() {
       return;
     }
 
+    const requiredFields = {
+      PSA,
+      Card,
+      TOR,
+      COR,
+      Pic
+    };
+
+    const isAllChecked = Object.values(requiredFields).every((value) => value);
+
+    if (!isAllChecked) {
+      alert('Please check all required fields');
+      return;
+    }
+
 
     const data = 
     {
