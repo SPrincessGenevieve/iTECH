@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Navbar from '../../../../Navbar';
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper, Button, TextField } from '@material-ui/core';
-import { Edit, Delete, KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
+import { Edit, Delete, KeyboardArrowDown, KeyboardArrowUp, SaveAltOutlined } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core';
 import axios from 'axios';
 import TextFieldProps from '../TextFieldProps';
@@ -11,7 +11,10 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import logo from "./../../../../Images/logoDark.png"
 import './css.css'
-
+import IconButton from '@material-ui/core/IconButton';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import { Save } from '@material-ui/icons';
 
 const useStyles = makeStyles({
   root: {
@@ -68,6 +71,8 @@ function Record() {
   const [newMiddleName, setNewMiddleName] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [newBday, setNewBday] = useState("");
+  const [newYear, setNewYear] = useState("");
+  const [newBalance, setNewBalance] = useState("");
   const [newAddres, setNewAddres] = useState("");
   const [newPreAddres, setNewPerAddres] = useState("");
   const [newPostalCode, setNewPostalCode] = useState("");
@@ -213,9 +218,15 @@ const handleCancelEdit = () => {
   const handleButtonClick = (tab, button) => {
     setActiveTab(tab);
   };
+
+  const [editingData, setEditingData] = useState(null);
+
+  const handleEditSubData = (row) => {
+    setEditingData(row);
+  };
  
   const filteredData = data.filter(row =>
-  `${row.firstname} ${row.middlename} ${row.lastname} ${row.year}`
+  `${row.firstname} ${row.middlename} ${row.lastname} ${row.year} ${row.studno}`
     .toLowerCase()
     .includes(searchTerm.toLowerCase())
 );
@@ -366,6 +377,8 @@ const handleCancelEdit = () => {
       .then((data) => setPeople(data));
   }, []);
 
+  
+
 
 
 
@@ -477,8 +490,99 @@ const handleCancelEdit = () => {
   };
   
 
+  
+  const handleSaveSubData2 = (row) => {
+    const updatedData = {
+      bday: newBday !== "" ? newBday : row.bday,
+      perAdd: newPreAddres !== "" ? newPreAddres : row.perAdd,
+      postalcode: newPostalCode !== "" ? newPostalCode : row.postalcode,
+      contactno: newContact !== "" ? newContact : row.contactno,
+      religion: newReligion !== "" ? newReligion : row.religion,
+      gender: newGender !== "" ? newGender : row.gender,
+      status: newStatus !== "" ? newStatus : row.status,
+      email: newEmail !== "" ? newEmail : row.email,
+      studno: row.studno,
+      firstname: row.firstname,
+      lastname: row.lastname,
+      middlename: row.middlename,
+      year: row.year,
+      balance: newBalance !== "" ? newBalance : row.balance,
+      subjectsEnrolled: row.subjectsEnrolled,
+      id: row.id,
 
 
+      Mlastname: newMlastname !== "" ? newMlastname : row.Mlastname,
+      Mfirstname: newMfirstname !== "" ? newMfirstname : row.Mfirstname,
+      Mage: newMage !== "" ? newMage : row.Mage,
+      MeducAttain: newMeducation !== "" ? newMeducation : row.MeducAttain,
+      Maddres: newMaddress !== "" ? newMaddress : row.Maddres,
+      Mincome: newMincome !== "" ? newMincome : row.Mincome,
+      MEmail: newMemail !== "" ? newMemail : row.MEmail,
+      MContact: newMcontact !== "" ? newMcontact : row.MContact,
+
+      Plastname: newPlastname !== "" ? newPlastname : row.Plastname,
+      Pfirstname: newPfirstname !== "" ? newPfirstname : row.Pfirstname,
+      Page: newPage !== "" ? newPage : row.Page,
+      PeducAttain: newPeducation !== "" ? newPeducation : row.PeducAttain,
+      Paddres: newPaddress !== "" ? newPaddress : row.Paddres,
+      Pincome: newPincome !== "" ? newPincome : row.Pincome,
+      PEmail: newPemail !== "" ? newPemail : row.PEmail,
+      PContact: newPcontact !== "" ? newPcontact : row.PContact,
+
+      ElemName: newElemName !== "" ? newElemName : row.ElemName,
+      ElemAdd: newElemAdd !== "" ? newElemAdd : row.ElemAdd,
+      JunioName: newJunioName !== "" ? newJunioName : row.JunioName,
+      JuniorAdd: newJuniorAdd !== "" ? newJuniorAdd : row.JuniorAdd,
+      SeniorName: newSeniorName !== "" ? newSeniorName : row.SeniorName,
+      SeniorAdd: newSeniorAdd !== "" ? newSeniorAdd : row.SeniorAdd,
+      CollageName: newCollageName !== "" ? newCollageName : row.CollageName,
+      CollegeAdd: newCollegeAdd !== "" ? newCollegeAdd : row.CollegeAdd,
+    };
+
+    updatedData.PSA = row.PSA;
+    updatedData.Card = row.Card;
+    updatedData.TOR = row.TOR;
+    updatedData.COR = row.COR;
+    updatedData.Pic = row.Pic;
+  
+    fetch(`http://localhost:3000/posts/${row.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(updatedData)
+    })
+      .then(response => response.json())
+      .then(data => {
+        setData(prevData => {
+          const updatedRows = prevData.map(prevRow => {
+            if (prevRow.id === row.id) {
+              return updatedData;
+            }
+            return prevRow;
+          });
+          return updatedRows;
+        });
+        setNewBday("");
+        setNewPerAddres("");
+        setNewPostalCode("");
+        setNewContact("");
+        setNewReligion("");
+        setNewGender("");
+        setNewStatus("");
+        setEditingData(null);
+        setnewMlastname("");
+        setnewMfirstname("");
+        setnewMage("");
+        setnewMeducation("");
+        setnewMaddress("");
+        setnewMincome("");
+        setnewMemail("");
+        setnewMcontact("");
+      })
+      .catch(error => console.log(error));
+  };
+  
 
 
   
@@ -557,7 +661,7 @@ const handleCancelEdit = () => {
                        
                        {activeTab === "student" &&
                         <div style={{marginLeft: "30rem", marginTop: "2rem"}}>
-                          <div style={{display:"flex", flexDirection:"row", marginLeft: "10rem", marginBottom:"2rem"}}>
+                          <div style={{display:"flex", flexDirection:"row", marginLeft: "7rem", marginBottom:"2rem"}}>
                               <div style={{marginRight: 30}}>
                                 <CheckBox checked={row.PSA}  disabled label="PSA/NSO"></CheckBox>
                               </div>
@@ -581,7 +685,7 @@ const handleCancelEdit = () => {
                             value={newBday}
                             onChange={(e) => setNewBday(e.target.value)}
                             helperText="Birth Date"
-                            disabled
+                            
                             />
                             <TextFieldProps
                               label={row.email}
@@ -589,7 +693,7 @@ const handleCancelEdit = () => {
                               value={newEmail}
                               onChange={(e) => setNewEmail(e.target.value)}
                               helperText="Email Address"
-                              disabled
+                              
                             />
                             </div>
 
@@ -600,7 +704,7 @@ const handleCancelEdit = () => {
                               value={newPreAddres}
                               onChange={(e) => setNewPerAddres(e.target.value)}
                               helperText="Permanent Address"
-                              disabled
+                              
                             />
                             <TextFieldProps
                               label={row.postalcode}
@@ -608,7 +712,7 @@ const handleCancelEdit = () => {
                               value={newPostalCode}
                               onChange={(e) => setNewPostalCode(e.target.value)}
                               helperText="Postal Code"
-                              disabled
+                              
                             />
                             </div>
 
@@ -619,7 +723,7 @@ const handleCancelEdit = () => {
                               value={newContact}
                               onChange={(e) => setNewContact(e.target.value)}
                               helperText="Contact No."
-                              disabled
+                              
                               />
                               <TextFieldProps
                                 label={row.religion}
@@ -627,7 +731,7 @@ const handleCancelEdit = () => {
                                 value={newReligion}
                                 onChange={(e) => setNewReligion(e.target.value)}
                                 helperText="Religion"
-                                disabled
+                                
                               />
                               </div>
 
@@ -638,7 +742,7 @@ const handleCancelEdit = () => {
                                 value={newGender}
                                 onChange={(e) => setNewGender(e.target.value)}
                                 helperText="Gender"
-                                disabled
+                                
                               />
                               <TextFieldProps
                                 label={row.status}
@@ -646,8 +750,11 @@ const handleCancelEdit = () => {
                                 value={newStatus}
                                 onChange={(e) => setNewStatus(e.target.value)}
                                 helperText="Status"
-                                disabled
+                                
                               />
+                            </div>
+                            <div style={{marginLeft: "28.5rem"}}>
+                              <Button style={{backgroundColor:"#00B02A", color:"white"}} onClick={() => handleSaveSubData2(row)} variant='contained'><Save></Save></Button>
                             </div>
                             
                         </div>
@@ -666,7 +773,7 @@ const handleCancelEdit = () => {
                             value={newMlastname}
                             onChange={(e) => setnewMlastname(e.target.value)}
                             helperText="Last name"
-                            disabled
+                            
                             />
                             <TextFieldProps
                               label={row.Mfirstname}
@@ -674,7 +781,7 @@ const handleCancelEdit = () => {
                               value={newMfirstname}
                               onChange={(e) => setnewMfirstname(e.target.value)}
                               helperText="First name"
-                              disabled
+                              
                             />
                             </div>
 
@@ -685,7 +792,7 @@ const handleCancelEdit = () => {
                               value={newMage}
                               onChange={(e) => setnewMage(e.target.value)}
                               helperText="Age"
-                              disabled
+                              
                             />
                             <TextFieldProps
                               label={row.MeducAttain}
@@ -693,7 +800,7 @@ const handleCancelEdit = () => {
                               value={newMeducation}
                               onChange={(e) => setnewMeducation(e.target.value)}
                               helperText="Educational Attainment"
-                              disabled
+                              
                             />
                             </div>
 
@@ -704,7 +811,7 @@ const handleCancelEdit = () => {
                               value={newMaddress}
                               onChange={(e) => setnewMaddress(e.target.value)}
                               helperText="Address"
-                              disabled
+                              
                               />
                               <TextFieldProps
                                 label={row.Mincome}
@@ -712,7 +819,7 @@ const handleCancelEdit = () => {
                                 value={newMincome}
                                 onChange={(e) => setnewMincome(e.target.value)}
                                 helperText="Average Income"
-                                disabled
+                                
                               />
                               </div>
 
@@ -723,7 +830,7 @@ const handleCancelEdit = () => {
                                 value={newMemail}
                                 onChange={(e) => setnewMemail(e.target.value)}
                                 helperText="Email"
-                                disabled
+                                
                               />
                                <TextFieldProps
                                 label={row.MContact}
@@ -731,7 +838,7 @@ const handleCancelEdit = () => {
                                 value={newMcontact}
                                 onChange={(e) => setnewMcontact(e.target.value)}
                                 helperText="Contact"
-                                disabled
+                                
                               />
                             </div>
                             </div>
@@ -746,7 +853,7 @@ const handleCancelEdit = () => {
                             value={newPlastname}
                             onChange={(e) => setnewPlastname(e.target.value)}
                             helperText="Last name"
-                            disabled
+                            
                             />
                             <TextFieldProps
                               label={row.Mfirstname}
@@ -754,18 +861,18 @@ const handleCancelEdit = () => {
                               value={newPfirstname}
                               onChange={(e) => setnewPfirstname(e.target.value)}
                               helperText="First name"
-                              disabled
+                              
                             />
                             </div>
 
                             <div style={{flexDirection:"row", display:"flex"}}>
                             <TextFieldProps
-                              label={row.Mage}
-                              placeholder={row.Mage}
+                              label={row.Page}
+                              placeholder={row.Page}
                               value={newPage}
                               onChange={(e) => setnewPage(e.target.value)}
                               helperText="Age"
-                              disabled
+                              
                             />
                             <TextFieldProps
                               label={row.PeducAttain}
@@ -773,7 +880,7 @@ const handleCancelEdit = () => {
                               value={newPeducation}
                               onChange={(e) => setnewPeducation(e.target.value)}
                               helperText="Educational Attainment"
-                              disabled
+                              
                             />
                             </div>
 
@@ -784,7 +891,7 @@ const handleCancelEdit = () => {
                               value={newPaddress}
                               onChange={(e) => setnewPaddress(e.target.value)}
                               helperText="Address"
-                              disabled
+                              
                               />
                               <TextFieldProps
                                 label={row.Mincome}
@@ -792,7 +899,7 @@ const handleCancelEdit = () => {
                                 value={newPincome}
                                 onChange={(e) => setnewPincome(e.target.value)}
                                 helperText="Average Income"
-                                disabled
+                                
                               />
                               </div>
 
@@ -803,7 +910,7 @@ const handleCancelEdit = () => {
                                 value={newPemail}
                                 onChange={(e) => setnewPemail(e.target.value)}
                                 helperText="Email"
-                                disabled
+                                
                               />
                                <TextFieldProps
                                 label={row.PContact}
@@ -811,8 +918,11 @@ const handleCancelEdit = () => {
                                 value={newPcontact}
                                 onChange={(e) => setnewPcontact(e.target.value)}
                                 helperText="Contact"
-                                disabled
+                                
                               />
+                            </div>
+                            <div style={{marginLeft: "48.5rem", marginBottom: "5rem"}}>
+                              <Button style={{backgroundColor:"#00B02A", color:"white"}} onClick={() => handleSaveSubData2(row)} variant='contained'><Save></Save></Button>
                             </div>
                             </div>
                         </div>
@@ -871,7 +981,7 @@ const handleCancelEdit = () => {
                             value={newElemName}
                             onChange={(e) => setnewElemName(e.target.value)}
                             helperText="School Name"
-                            disabled
+                            
                             />
                             <TextFieldProps
                               label={row.JunioName}
@@ -879,7 +989,7 @@ const handleCancelEdit = () => {
                               value={newJunioName}
                               onChange={(e) => setnewJunioName(e.target.value)}
                               helperText="School Name"
-                              disabled
+                              
                             />
                             </div>
 
@@ -890,7 +1000,7 @@ const handleCancelEdit = () => {
                               value={newElemAdd}
                               onChange={(e) => setnewElemAdd(e.target.value)}
                               helperText="School Address"
-                              disabled
+                              
                             />
                             <TextFieldProps
                               label={row.JuniorAdd}
@@ -898,7 +1008,7 @@ const handleCancelEdit = () => {
                               value={newJuniorAdd}
                               onChange={(e) => setnewJuniorAdd(e.target.value)}
                               helperText="School Address"
-                              disabled
+                              
                             />
                             </div>
 
@@ -918,7 +1028,7 @@ const handleCancelEdit = () => {
                               value={newSeniorName}
                               onChange={(e) => setnewSeniorName(e.target.value)}
                               helperText="School Name"
-                              disabled
+                              
                               />
                               <TextFieldProps
                                 label={row.CollageName}
@@ -926,7 +1036,7 @@ const handleCancelEdit = () => {
                                 value={newCollageName}
                                 onChange={(e) => setnewCollageName(e.target.value)}
                                 helperText="School Name"
-                                disabled
+                                
                               />
                               </div>
 
@@ -937,7 +1047,7 @@ const handleCancelEdit = () => {
                                 value={newSeniorAdd}
                                 onChange={(e) => setnewSeniorAdd(e.target.value)}
                                 helperText="School Address"
-                                disabled
+                                
                               />
                               <TextFieldProps
                                 label={row.CollegeAdd}
@@ -945,8 +1055,11 @@ const handleCancelEdit = () => {
                                 value={newCollegeAdd}
                                 onChange={(e) => setnewCollegeAdd(e.target.value)}
                                 helperText="School Address"
-                                disabled
+                                
                               />
+                            </div>
+                            <div style={{marginLeft: "48.5rem", marginBottom:"5rem"}}>
+                              <Button style={{backgroundColor:"#00B02A", color:"white"}} onClick={() => handleSaveSubData2(row)} variant='contained'><Save></Save></Button>
                             </div>
                           </div>
                         )}
