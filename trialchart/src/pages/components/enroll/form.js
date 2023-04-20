@@ -540,12 +540,24 @@ export default function Form() {
     }
   
     const selectedFaculty = optionFac.find((faculty) => faculty.value === selectedOptionFac.value);
-    if (selectedFaculty.count >= 3) {
-      alert(`This professor ${selectedOptionFac.value} is already full`);
-      return; // return if the selected faculty member has already been selected three times
+  
+    // Filter the tableData by selected faculty and selected subject
+    const filteredData = tableData.filter((data) => {
+      return (
+        data.facultyData === selectedOptionFac.value &&
+        data.subData === selectedOptionSub.value
+      );
+    });
+  
+    // Count the number of elements in the filtered array
+    const facultyCount = filteredData.length;
+  
+    if (selectedFaculty.count + facultyCount >= 3) {
+      alert(`${selectedOptionFac.value} is already full for ${selectedOptionSub.value}`);
+      return; // return if the selected faculty member has already been selected three times for the selected subject
     }
   
-    const newTableData = [    ...tableData,    {    YearLevel: yearLevel.value,       Semester: semester.value,            subData: selectedOptionSub.value,      facultyData: selectedOptionFac.value,      schedData: selectedOptionSched.value,    },  ];
+    const newTableData = [    ...tableData,    {      YearLevel: yearLevel.value,      Semester: semester.value,      subData: selectedOptionSub.value,      facultyData: selectedOptionFac.value,      schedData: selectedOptionSched.value,    },  ];
   
     setTableData(newTableData);
   
@@ -564,6 +576,14 @@ export default function Form() {
     setYearLevel(null);
     setSemester(null);
   };
+  
+  
+  
+  
+  
+
+
+
 
   const handleRemoveFromTable = (index) => {
     const newData = [...tableData];
@@ -637,7 +657,7 @@ const optionSubjects = yearLevel && semester && yearLevel.value === 'First Year'
     : yearLevel && semester && yearLevel.value === 'Third Year' && semester.value === 'First Semester' 
       ? [
         { value: 'Information Assurance and Security', label: 'Information Assurance and Security' },
-        { value: 'Computer Programing 1', label: 'Computer Programing 1' },
+        { value: 'Technopreneurship', label: 'Technopreneurship' },
         { value: 'Mobile Programming', label: '	Mobile Programming' }
       ]
     : yearLevel && semester && yearLevel.value === 'Third Year' && semester.value === 'Second Semester' 
@@ -661,171 +681,274 @@ const optionSubjects = yearLevel && semester && yearLevel.value === 'First Year'
 
   
 
- 
-
-
-
-const [optionFacSub, setOptionFacSub] = useState([
-  {
-    label: "Introduction to Computing",
-    options: [
-      { value: 'Dr. Smith', label: 'Dr. Smith', count: 0 },
-      { value: 'Prof. Johnson', label: 'Prof. Johnson', count: 0 },
-      { value: 'Ms. Davis', label: 'Ms. Davis', count: 0 }
-    ]},
-    {
-    label: "Computer Programing 1",
-    options: [
+ const optionFacSub = semester && yearLevel && semester.value === "First Semester" && selectedOptionSub && yearLevel.value === "First Year" && selectedOptionSub.value === "Introduction to Computing"
+ ? [
+    { value: 'Dr. Smith', label: 'Dr. Smith', count: 0 },
+    { value: 'Prof. Johnson', label: 'Prof. Johnson', count: 0 },
+    { value: 'Ms. Davis', label: 'Ms. Davis', count: 0 }
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "First Year" && selectedOptionSub.value === "Computer Programing 1"
+  ? [
     { value: 'Emanuel Jackson', label: 'Emanuel Jackson', count: 0 },
     { value: 'Kathryn Lyons', label: 'Kathryn Lyons', count: 0 },
-    { value: 'Deanna Price', label: 'Deanna Price', count: 0 },
-    ]},
-    {
-    label: "Purposive Communication",
-    options: [
+    { value: 'Deanna Price', label: 'Deanna Price', count: 0 }
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "First Year" && selectedOptionSub.value === "Purposive Communication"
+  ? [
     { value: 'Jaylen Hutchinson', label: 'Jaylen Hutchinson', count: 0 },
     { value: 'Kaleigh Chambers', label: 'Kaleigh Chambers', count: 0 },
-    { value: 'William Berg', label: 'William Berg', count: 0 },
-    ]},
-    {
-    label: "Data Structures and Algorithms",
-    options: [
+    { value: 'William Berg', label: 'William Berg', count: 0 }
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "Second Semester" && yearLevel.value === "First Year" && selectedOptionSub.value === "Computer Programing 2"
+  ? [
     { value: 'Rohan Marsh', label: 'Rohan Marsh', count: 0 },
     { value: 'Dillon Terrell', label: 'Dillon Terrell', count: 0 },
-    { value: 'Claire Nguyen', label: 'Claire Nguyen', count: 0 },
-    ]},
-    {
-    label: "Discrete Mathematics",
-    options: [
+    { value: 'Claire Nguyen', label: 'Claire Nguyen', count: 0 }
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "Second Semester" && yearLevel.value === "First Year" && selectedOptionSub.value === "Data Structures and Algorithms"
+  ? [
     { value: 'Kailee Huffman', label: 'Kailee Huffman', count: 0 },
     { value: 'Hayley Curry', label: 'Hayley Curry', count: 0 },
-    { value: 'Makena Huynh', label: 'Makena Huynh', count: 0 },
-    ]},
-    {
-    label: "Intro to Human Computer Interaction",
-    options: [
+    { value: 'Makena Huynh', label: 'Makena Huynh', count: 0 }
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "Second Semester" && yearLevel.value === "First Year" && selectedOptionSub.value === "Discrete Mathematics"
+  ? [
     { value: 'Elliana Burton', label: 'Elliana Burton', count: 0 },
     { value: 'Cara Mcdaniel', label: 'Cara Mcdaniel', count: 0 },
-    { value: 'Angelo Chavez', label: 'Angelo Chavez', count: 0 },
-    ]},
-    {
-    label: "Fundamentals of Database Systems",
-    options: [
+    { value: 'Angelo Chavez', label: 'Angelo Chavez', count: 0 }
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "Second Year" && selectedOptionSub.value === "Intro to Human Computer Interaction"
+  ? [
     { value: 'Franklin Daugherty', label: 'Franklin Daugherty', count: 0 },
     { value: 'Taylor Ingram', label: 'Taylor Ingram', count: 0 },
-    { value: 'Colin Glass', label: 'Colin Glass', count: 0 },
-    ]},
-    {
-    label: "Platform Technologies",
-    options: [
+    { value: 'Colin Glass', label: 'Colin Glass', count: 0 }
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "Second Year" && selectedOptionSub.value === "Fundamentals of Database Systems"
+  ? [
     { value: 'Addisyn Sampson', label: 'Addisyn Sampson', count: 0 },
     { value: 'Rachael Campos', label: 'Rachael Campos', count: 0 },
-    { value: 'Desiree Juarez', label: 'Desiree Juarez', count: 0 },
-    ]},
-    {
-    label: "Information Management",
-    options: [
+    { value: 'Desiree Juarez', label: 'Desiree Juarez', count: 0 }
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "Second Year" && selectedOptionSub.value === "Platform Technologies"
+  ? [
     { value: 'Trystan Ashley', label: 'Trystan Ashley', count: 0 },
     { value: 'Elvis Downs', label: 'Elvis Downs', count: 0 },
-    { value: 'Naomi French', label: 'Naomi French', count: 0 },
-    ]},
-    {
-    label: "Networking 1",
-    options: [
+    { value: 'Naomi French', label: 'Naomi French', count: 0 }
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "Second Semester" && yearLevel.value === "Second Year" && selectedOptionSub.value === "Information Management"
+  ? [
     { value: 'Franklin Daugherty', label: 'Franklin Daugherty', count: 0 },
     { value: 'Taylor Ingram', label: 'Taylor Ingram', count: 0 },
-    { value: 'Colin Glass', label: 'Colin Glass', count: 0 },
-    ]},
-    {
-    label: "Web Systems and Technolgies",
-    options: [
+    { value: 'Colin Glass', label: 'Colin Glass', count: 0 }
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "Second Semester" && yearLevel.value === "Second Year" && selectedOptionSub.value === "Networking 1"
+  ? [
     { value: 'Addisyn Sampson', label: 'Addisyn Sampson', count: 0 },
     { value: 'Rachael Campos', label: 'Rachael Campos', count: 0 },
-    { value: 'Desiree Juarez', label: 'Desiree Juarez', count: 0 },
-    ]},
-    {
-    label: "Information Assurance and Security",
-    options: [
+    { value: 'Desiree Juarez', label: 'Desiree Juarez', count: 0 }
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "Second Semester" && yearLevel.value === "Second Year" && selectedOptionSub.value === "Web Systems and Technolgies"
+  ? [
     { value: 'Trystan Ashley', label: 'Trystan Ashley', count: 0 },
     { value: 'Elvis Downs', label: 'Elvis Downs', count: 0 },
-    { value: 'Naomi French', label: 'Naomi French', count: 0 },
-    ]},
-    {
-    label: "Networking 2",
-    options: [
+    { value: 'Naomi French', label: 'Naomi French', count: 0 }
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "Third Year" && selectedOptionSub.value === "Information Assurance and Security"
+  ? [
     { value: 'Dr. Smith', label: 'Dr. Smith', count: 0 },
     { value: 'Prof. Johnson', label: 'Prof. Johnson', count: 0 },
-    { value: 'Ms. Davis', label: 'Ms. Davis', count: 0 },
-    ]},
-    {
-    label: "	Mobile Programming",
-    options: [
-    { value: 'Emanuel Jackson', label: 'Emanuel Jackson', count: 0 },
-    { value: 'Kathryn Lyons', label: 'Kathryn Lyons', count: 0 },
-    { value: 'Deanna Price', label: 'Deanna Price', count: 0 },
-    ]},
-    {
-    label: "CAPSTONE Project and Research 1",
-    options: [
+    { value: 'Ms. Davis', label: 'Ms. Davis', count: 0 }
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "Third Year" && selectedOptionSub.value === "Technopreneurship"
+  ? [
     { value: 'Jaylen Hutchinson', label: 'Jaylen Hutchinson', count: 0 },
     { value: 'Kaleigh Chambers', label: 'Kaleigh Chambers', count: 0 },
-    { value: 'William Berg', label: 'William Berg', count: 0 },
-    ]},
-    {
-    label: "Integrative Programming and Technologies",
-    options: [
+    { value: 'William Berg', label: 'William Berg', count: 0 }
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "Third Year" && selectedOptionSub.value === "Mobile Programming"
+  ? [
     { value: 'Dr. Smith', label: 'Dr. Smith', count: 0 },
     { value: 'Prof. Johnson', label: 'Prof. Johnson', count: 0 },
-    { value: 'Ms. Davis', label: 'Ms. Davis', count: 0 },
-    ]},
-    {
-    label: "Applications Development and Emerging Technologies",
-    options: [
+    { value: 'Ms. Davis', label: 'Ms. Davis', count: 0 }
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "Second Semester" && yearLevel.value === "Third Year" && selectedOptionSub.value === "CAPSTONE Project and Research 1"
+  ? [
     { value: 'Jonas Peters', label: 'Jonas Peters', count: 0 },
     { value: 'Colten Meadows', label: 'Colten Meadows', count: 0 },
-    { value: 'Laney Murray', label: 'Laney Murray', count: 0 },
-    ]},
-    {
-    label: "CAPSTONE Project and Research 2",
-    options: [
-      { value: 'Haiden Goodwin', label: 'Haiden Goodwin', count: 0 },
-      { value: 'Kaleigh Chambers', label: 'Kaleigh Chambers', count: 0 },
-      { value: 'Luke Rios', label: 'Luke Rios', count: 0 },
-    ]},
-    {
-    label: "System Administration and Maintenance",
-    options: [
-      { value: 'Mara Cross', label: 'Dr. Smith', count: 0 },
-      { value: 'Jessie Day', label: 'Prof. Johnson', count: 0 },
-      { value: 'Savanna Neal', label: 'Ms. Davis', count: 0 },
-    ]},
-    {
-    label: "Social and Professional Issues	",
-    options: [
+    { value: 'Laney Murray', label: 'Laney Murray', count: 0 }
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "Second Semester" && yearLevel.value === "Third Year" && selectedOptionSub.value === "Integrative Programming and Technologies"
+  ? [
+    { value: 'Haiden Goodwin', label: 'Haiden Goodwin', count: 0 },
+    { value: 'Kaleigh Chambers', label: 'Kaleigh Chambers', count: 0 },
+    { value: 'Luke Rios', label: 'Luke Rios', count: 0 }
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "Second Semester" && yearLevel.value === "Third Year" && selectedOptionSub.value === "Applications Development and Emerging Technologies"
+  ? [
+    { value: 'Mara Cross', label: 'Dr. Smith', count: 0 },
+    { value: 'Jessie Day', label: 'Prof. Johnson', count: 0 },
+    { value: 'Savanna Neal', label: 'Ms. Davis', count: 0 }
+]
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "Fourth Year" && selectedOptionSub.value === "CAPSTONE Project and Research 2"
+  ? [
     { value: 'Jonas Peters', label: 'Jonas Peters', count: 0 },
     { value: 'Colten Meadows', label: 'Colten Meadows', count: 0 },
-    { value: 'Laney Murray', label: 'Laney Murray', count: 0 },
-    ]},
+    { value: 'Laney Murray', label: 'Laney Murray', count: 0 }
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "Fourth Year" && selectedOptionSub.value === "System Administration and Maintenance"
+  ? [
+    { value: 'Santiago Hopkins', label: 'Haiden Goodwin', count: 0 },
+    { value: 'Giovanny Abbott', label: 'Kaleigh Chambers', count: 0 },
+    { value: 'Kayla Joseph', label: 'Luke Rios', count: 0 }
+  ] 
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "Fourth Year" && selectedOptionSub.value === "Social and Professional Issues"
+  ? [
+    { value: 'Mara Cross', label: 'Dr. Smith', count: 0 },
+    { value: 'Jessie Day', label: 'Prof. Johnson', count: 0 },
+    { value: 'Savanna Neal', label: 'Ms. Davis', count: 0 }
+  ] 
+  : semester && yearLevel && selectedOptionSub && semester.value === "Second Semester" && yearLevel.value === "Fourth Year" && selectedOptionSub.value === "PRACTICUM(486 hrs.)"
+  ? [
+    { value: 'Charity Mcgee', label: 'Jonas Peters', count: 0 },
+    { value: 'Colten Meadows', label: 'Colten Meadows', count: 0 },
+    { value: 'Laney Ponce', label: 'Laney Murray', count: 0 }
+  ] 
+  : []
 
-    {
-      label: "PRACTICUM(486 hrs.)",
-      options: [
-        { value: 'Santiago Hopkins', label: 'Haiden Goodwin', count: 0 },
-        { value: 'Giovanny Abbott', label: 'Kaleigh Chambers', count: 0 },
-        { value: 'Kayla Joseph', label: 'Luke Rios', count: 0 }
-      ]},
+  const optionSched = semester && yearLevel && semester.value === "First Semester" && selectedOptionSub && yearLevel.value === "First Year" && selectedOptionSub.value === "Introduction to Computing"
+ ? [
+  { value: 'MWF 9:00 AM - 10:00 AM', label: 'MWF 9:00 AM - 10:00 AM' },
+  { value: 'MWF 10:00 AM - 11:00 AM', label: 'MWF 10:00 AM - 11:00 AM' },
+  { value: 'TTH 1:00 PM - 2:30 PM', label: 'TTH 1:00 PM - 2:30 PM' },
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "First Year" && selectedOptionSub.value === "Computer Programing 1"
+  ? [
+    { value: 'MThF 7:00 AM - 9:00 AM', label: 'MThF 7:00 AM - 9:00 AM' },
+    { value: 'MThF 1:00 AM - 4:00 AM', label: 'MThF 1:00 AM - 4:00 AM' },
+    { value: 'TW 1:30 PM - 4:30 PM', label: 'TW 1:30 PM - 4:30 PM' }
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "First Year" && selectedOptionSub.value === "Purposive Communication"
+  ? [
+    { value: 'MThF 7:00 AM - 9:00 AM', label: 'MThF 7:00 AM - 9:00 AM' },
+    { value: 'MThF 1:00 AM - 4:00 AM', label: 'MThF 1:00 AM - 4:00 AM' },
+    { value: 'TW 1:30 PM - 4:30 PM', label: 'TW 1:30 PM - 4:30 PM' },
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "Second Semester" && yearLevel.value === "First Year" && selectedOptionSub.value === "Computer Programing 2"
+  ? [
+    { value: 'MWF 9:00 AM - 10:00 AM', label: 'MWF 9:00 AM - 10:00 AM' },
+    { value: 'MWF 10:00 AM - 11:00 AM', label: 'MWF 10:00 AM - 11:00 AM' },
+    { value: 'TTH 1:00 PM - 2:30 PM', label: 'TTH 1:00 PM - 2:30 PM' },
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "Second Semester" && yearLevel.value === "First Year" && selectedOptionSub.value === "Data Structures and Algorithms"
+  ? [
+    { value: 'MWF 9:00 AM - 10:00 AM', label: 'MWF 9:00 AM - 10:00 AM' },
+    { value: 'MWF 10:00 AM - 11:00 AM', label: 'MWF 10:00 AM - 11:00 AM' },
+    { value: 'TTH 1:00 PM - 2:30 PM', label: 'TTH 1:00 PM - 2:30 PM' },
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "Second Semester" && yearLevel.value === "First Year" && selectedOptionSub.value === "Discrete Mathematics"
+  ? [
+    { value: 'MWF 9:00 AM - 10:00 AM', label: 'MWF 9:00 AM - 10:00 AM' },
+    { value: 'MWF 10:00 AM - 11:00 AM', label: 'MWF 10:00 AM - 11:00 AM' },
+    { value: 'TTH 1:00 PM - 2:30 PM', label: 'TTH 1:00 PM - 2:30 PM' },
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "Second Year" && selectedOptionSub.value === "Intro to Human Computer Interaction"
+  ? [
+    { value: 'MWF 8:00 AM - 9:00 AM', label: 'MWF 8:00 AM - 9:00 AM' },
+    { value: 'TTH 10:00 AM - 11:30 AM', label: 'TTH 10:00 AM - 11:30 AM' },
+    { value: 'MWF 2:00 PM - 3:30 PM', label: 'MWF 2:00 PM - 3:30 PM' },
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "Second Year" && selectedOptionSub.value === "Fundamentals of Database Systems"
+  ? [
+    { value: 'TTH 9:00 AM - 10:30 AM', label: 'TTH 9:00 AM - 10:30 AM' },
+    { value: 'MWF 11:00 AM - 12:00 PM', label: 'MWF 11:00 AM - 12:00 PM' },
+    { value: 'TTH 2:00 PM - 3:30 PM', label: 'TTH 2:00 PM - 3:30 PM' },
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "Second Year" && selectedOptionSub.value === "Platform Technologies"
+  ? [
+    { value: 'MWF 3:00 PM - 4:00 PM', label: 'MWF 3:00 PM - 4:00 PM' },
+  { value: 'TTH 11:00 AM - 12:30 PM', label: 'TTH 11:00 AM - 12:30 PM' },
+  { value: 'MWF 10:00 AM - 11:00 AM', label: 'MWF 10:00 AM - 11:00 AM' },
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "Second Semester" && yearLevel.value === "Second Year" && selectedOptionSub.value === "Information Management"
+  ? [
+    { value: 'MWF 9:00 AM - 10:00 AM', label: 'MWF 9:00 AM - 10:00 AM' },
+    { value: 'TTH 8:00 AM - 9:30 AM', label: 'TTH 8:00 AM - 9:30 AM' },
+    { value: 'MWF 10:00 AM - 11:00 AM', label: 'MWF 10:00 AM - 11:00 AM' },
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "Second Semester" && yearLevel.value === "Second Year" && selectedOptionSub.value === "Networking 1"
+  ? [
+    { value: 'TTH 9:30 AM - 11:00 AM', label: 'TTH 9:30 AM - 11:00 AM' },
+    { value: 'MWF 11:00 AM - 12:00 PM', label: 'MWF 11:00 AM - 12:00 PM' },
+    { value: 'TTH 11:00 AM - 12:30 PM', label: 'TTH 11:00 AM - 12:30 PM' },
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "Second Semester" && yearLevel.value === "Second Year" && selectedOptionSub.value === "Web Systems and Technolgies"
+  ? [
+    { value: 'MWF 1:00 PM - 2:00 PM', label: 'MWF 1:00 PM - 2:00 PM' },
+    { value: 'TTH 12:30 PM - 2:00 PM', label: 'TTH 12:30 PM - 2:00 PM' },
+    { value: 'MWF 2:00 PM - 3:00 PM', label: 'MWF 2:00 PM - 3:00 PM' },
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "Third Year" && selectedOptionSub.value === "Information Assurance and Security"
+  ? [
+    { value: 'TTH 2:00 PM - 3:30 PM', label: 'TTH 2:00 PM - 3:30 PM' },
+    { value: 'MWF 3:00 PM - 4:00 PM', label: 'MWF 3:00 PM - 4:00 PM' },
+    { value: 'TTH 3:30 PM - 5:00 PM', label: 'TTH 3:30 PM - 5:00 PM' },
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "Third Year" && selectedOptionSub.value === "Technopreneurship"
+  ? [
+    { value: 'MWF 4:00 PM - 5:00 PM', label: 'MWF 4:00 PM - 5:00 PM' },
+    { value: 'TTH 5:00 PM - 6:30 PM', label: 'TTH 5:00 PM - 6:30 PM' },
+    { value: 'MWF 5:00 PM - 6:00 PM', label: 'MWF 5:00 PM - 6:00 PM' },
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "Third Year" && selectedOptionSub.value === "Mobile Programming"
+  ? [
+    { value: 'TTH 6:30 PM - 8:00 PM', label: 'TTH 6:30 PM - 8:00 PM' },
+    { value: 'MWF 6:00 PM - 7:00 PM', label: 'MWF 6:00 PM - 7:00 PM' },
+    { value: 'TTH 8:00 AM - 9:00 AM', label: 'TTH 8:00 AM - 9:00 AM' },
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "Second Semester" && yearLevel.value === "Third Year" && selectedOptionSub.value === "CAPSTONE Project and Research 1"
+  ? [
+    { value: 'MWF 2:00 PM - 3:30 PM', label: 'MWF 2:00 PM - 3:30 PM' },
+    { value: 'TTH 10:00 AM - 11:30 AM', label: 'TTH 10:00 AM - 11:30 AM' },
+    { value: 'MWF 4:00 PM - 5:30 PM', label: 'MWF 4:00 PM - 5:30 PM' }
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "Second Semester" && yearLevel.value === "Third Year" && selectedOptionSub.value === "Integrative Programming and Technologies"
+  ? [
+    { value: 'TTH 3:00 PM - 4:30 PM', label: 'TTH 3:00 PM - 4:30 PM' },
+    { value: 'MWF 1:00 PM - 2:30 PM', label: 'MWF 1:00 PM - 2:30 PM' },
+    { value: 'TTH 12:00 PM - 1:30 PM', label: 'TTH 12:00 PM - 1:30 PM' }
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "Second Semester" && yearLevel.value === "Third Year" && selectedOptionSub.value === "Applications Development and Emerging Technologies"
+  ? [
+    { value: 'MWF 11:00 AM - 12:00 PM', label: 'MWF 11:00 AM - 12:00 PM' },
+    { value: 'TTH 10:00 AM - 11:30 AM', label: 'TTH 10:00 AM - 11:30 AM' },
+    { value: 'MWF 1:00 PM - 2:00 PM', label: 'MWF 1:00 PM - 2:00 PM' },
+]
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "Fourth Year" && selectedOptionSub.value === "CAPSTONE Project and Research 2"
+  ? [
+    { value: 'TTH 2:00 PM - 3:30 PM', label: 'TTH 2:00 PM - 3:30 PM' },
+    { value: 'MWF 10:00 AM - 11:00 AM', label: 'MWF 10:00 AM - 11:00 AM' },
+    { value: 'TTH 9:00 AM - 10:30 AM', label: 'TTH 9:00 AM - 10:30 AM' },
+  ]
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "Fourth Year" && selectedOptionSub.value === "System Administration and Maintenance"
+  ? [
+    { value: 'MWF 3:00 PM - 4:00 PM', label: 'MWF 3:00 PM - 4:00 PM' },
+    { value: 'TTH 11:00 AM - 12:30 PM', label: 'TTH 11:00 AM - 12:30 PM' },
+    { value: 'MWF 12:00 PM - 1:00 PM', label: 'MWF 12:00 PM - 1:00 PM' },
+  ] 
+  : semester && yearLevel && selectedOptionSub && semester.value === "First Semester" && yearLevel.value === "Fourth Year" && selectedOptionSub.value === "Social and Professional Issues"
+  ? [
+    { value: 'TTH 3:00 PM - 4:30 PM', label: 'TTH 3:00 PM - 4:30 PM' },
+    { value: 'MWF 2:00 PM - 3:00 PM', label: 'MWF 2:00 PM - 3:00 PM' },
+    { value: 'TTH 1:30 PM - 3:00 PM', label: 'TTH 1:30 PM - 3:00 PM' },
+  ] 
+  : semester && yearLevel && selectedOptionSub && semester.value === "Second Semester" && yearLevel.value === "Fourth Year" && selectedOptionSub.value === "PRACTICUM(486 hrs.)"
+  ? [
+    { value: 'MWF 9:00 AM - 10:00 AM', label: 'MWF 9:00 AM - 10:00 AM' },
+    { value: 'TTH 11:30 AM - 1:00 PM', label: 'TTH 11:30 AM - 1:00 PM' },
+    { value: 'MWF 4:00 PM - 5:00 PM', label: 'MWF 4:00 PM - 5:00 PM' },
+  ] 
+  : []
 
-
-  
-])
-
-
-//FIRST YEAR FIRST SEM
-const [optionSubFFSem, setSubFFSem] = useState ([
-  { value: 'Introduction to Computing', label: 'Introduction to Computing' },
-  { value: 'Computer Programing 1', label: 'Computer Programing 1' },
-  { value: 'Purposive Communication', label: 'Purposive Communication' }
-]);
 
 const [optionFacIntroCom, setOptionFacIntroCom] = useState([
   { value: 'Dr. Smith', label: 'Dr. Smith', count: 0 },
@@ -837,118 +960,6 @@ const [optionComProg, setOptionComProg] = useState([
   { value: 'Emanuel Jackson', label: 'Emanuel Jackson', count: 0 },
   { value: 'Kathryn Lyons', label: 'Kathryn Lyons', count: 0 },
   { value: 'Deanna Price', label: 'Deanna Price', count: 0 },
-]);
-
-const [optionPurCom, setOptionPurCom] = useState([
-  { value: 'Jaylen Hutchinson', label: 'Jaylen Hutchinson', count: 0 },
-  { value: 'Kaleigh Chambers', label: 'Kaleigh Chambers', count: 0 },
-  { value: 'William Berg', label: 'William Berg', count: 0 },
-]);
-
-const [optionSched11, setOptionSched11] = useState ([
-  { value: 'MWF 9:00 AM - 10:00 AM', label: 'MWF 9:00 AM - 10:00 AM' },
-  { value: 'MWF 10:00 AM - 11:00 AM', label: 'MWF 10:00 AM - 11:00 AM' },
-  { value: 'TTH 1:00 PM - 2:30 PM', label: 'TTH 1:00 PM - 2:30 PM' },
-]);
-
-
-
-
-//FIRST YEAR SECOND SEM
-const [optionSubFSSem, setSubFSSem] = useState ([
-  { value: 'Computer Programing 2', label: 'Computer Programing 2' },
-  { value: 'Data Structures and Algorithms', label: 'Data Structures and Algorithms' },
-  { value: 'Discrete Mathematics', label: 'Discrete Mathematics' }
-]);
-
-const [optionFacComProg, setOptionFacComProg] = useState([
-  { value: 'Rohan Marsh', label: 'Rohan Marsh', count: 0 },
-  { value: 'Dillon Terrell', label: 'Dillon Terrell', count: 0 },
-  { value: 'Claire Nguyen', label: 'Claire Nguyen', count: 0 },
-]);
-
-const [optionFacDataStruc, setOptionFacDataStruc] = useState([
-  { value: 'Kailee Huffman', label: 'Kailee Huffman', count: 0 },
-  { value: 'Hayley Curry', label: 'Hayley Curry', count: 0 },
-  { value: 'Makena Huynh', label: 'Makena Huynh', count: 0 },
-]);
-
-const [optionMath, setOptionMath] = useState([
-  { value: 'Elliana Burton', label: 'Elliana Burton', count: 0 },
-  { value: 'Cara Mcdaniel', label: 'Cara Mcdaniel', count: 0 },
-  { value: 'Angelo Chavez', label: 'Angelo Chavez', count: 0 },
-]);
-
-const [optionSched12, setOptionSched12] = useState ([
-  { value: 'MThF 7:00 AM - 9:00 AM', label: 'MThF 7:00 AM - 9:00 AM' },
-  { value: 'MThF 1:00 AM - 4:00 AM', label: 'MThF 1:00 AM - 4:00 AM' },
-  { value: 'TW 1:30 PM - 4:30 PM', label: 'TW 1:30 PM - 4:30 PM' },
-]);
-
-
-
-//SECOND YEAR FIRST SEM
-const [optionSubSFSem, setSubSFSem] = useState ([
-  { value: 'Intro to Human Computer Interaction', label: 'Intro to Human Computer Interaction' },
-  { value: 'Fundamentals of Database Systems', label: 'Fundamentals of Database Systems' },
-  { value: 'Platform Technologies', label: 'Platform Technologies' }
-]);
-
-const [optionFacIntroHum, setOptionFacIntroHum] = useState([
-  { value: 'Franklin Daugherty', label: 'Franklin Daugherty', count: 0 },
-  { value: 'Taylor Ingram', label: 'Taylor Ingram', count: 0 },
-  { value: 'Colin Glass', label: 'Colin Glass', count: 0 },
-]);
-
-const [optionFacFDS, setOptionFDS] = useState([
-  { value: 'Addisyn Sampson', label: 'Addisyn Sampson', count: 0 },
-  { value: 'Rachael Campos', label: 'Rachael Campos', count: 0 },
-  { value: 'Desiree Juarez', label: 'Desiree Juarez', count: 0 },
-]);
-
-const [optionPlatTech, setOptionPlatTech] = useState([
-  { value: 'Trystan Ashley', label: 'Trystan Ashley', count: 0 },
-  { value: 'Elvis Downs', label: 'Elvis Downs', count: 0 },
-  { value: 'Naomi French', label: 'Naomi French', count: 0 },
-]);
-
-const [optionSched21, setOptionSched21] = useState([
-  { value: 'MThF 7:00 AM - 9:00 AM', label: 'MThF 7:00 AM - 9:00 AM' },
-  { value: 'MThF 1:00 AM - 4:00 AM', label: 'MThF 1:00 AM - 4:00 AM' },
-  { value: 'TW 1:30 PM - 4:30 PM', label: 'TW 1:30 PM - 4:30 PM' },
-]);
-
-
-
-//SECOND YEAR SECOND SEM
-const [optionSubSSSem, setSubSSSem] = useState ([
-  { value: 'Information Management', label: 'Information Management' },
-  { value: 'Networking 1', label: 'Networking 1' },
-  { value: 'Web Systems and Technolgies', label: 'Web Systems and Technolgies' }
-]);
-
-const [optionFacInfoMan, setOptionFacInfoMan] = useState([
-  { value: 'Franklin Daugherty', label: 'Franklin Daugherty', count: 0 },
-  { value: 'Taylor Ingram', label: 'Taylor Ingram', count: 0 },
-  { value: 'Colin Glass', label: 'Colin Glass', count: 0 },
-]);
-
-const [optionFacNet1, setOptionFacNet1] = useState([
-  { value: 'Addisyn Sampson', label: 'Addisyn Sampson', count: 0 },
-  { value: 'Rachael Campos', label: 'Rachael Campos', count: 0 },
-  { value: 'Desiree Juarez', label: 'Desiree Juarez', count: 0 },
-]);
-
-const [optionWST, setOptionWST] = useState([
-  { value: 'Trystan Ashley', label: 'Trystan Ashley', count: 0 },
-  { value: 'Elvis Downs', label: 'Elvis Downs', count: 0 },
-  { value: 'Naomi French', label: 'Naomi French', count: 0 },
-]);
-
-const [optionSched22, setOptionSched22] = useState([
-  { value: 'MThF 7:00 AM - 9:00 AM', label: 'MThF 7:00 AM - 9:00 AM' },
-  { value: 'MThF 1:00 AM - 4:00 AM', label: 'MThF 1:00 AM - 4:00 AM' },
-  { value: 'TW 1:30 PM - 4:30 PM', label: 'TW 1:30 PM - 4:30 PM' },
 ]);
 
 //THIRD YEAR FIRST SEM
@@ -963,87 +974,6 @@ const [optionSched22, setOptionSched22] = useState([
     { value: 'Prof. Johnson', label: 'Prof. Johnson', count: 0 },
     { value: 'Ms. Davis', label: 'Ms. Davis', count: 0 },
   ]);
-
-  const [optionFacIAS, setOptionFacIAS] = useState([
-    { value: 'Emanuel Jackson', label: 'Emanuel Jackson', count: 0 },
-    { value: 'Kathryn Lyons', label: 'Kathryn Lyons', count: 0 },
-    { value: 'Deanna Price', label: 'Deanna Price', count: 0 },
-  ]);
-
-  const [optionMobProg, setoptionMobProg] = useState([
-    { value: 'Jaylen Hutchinson', label: 'Jaylen Hutchinson', count: 0 },
-    { value: 'Kaleigh Chambers', label: 'Kaleigh Chambers', count: 0 },
-    { value: 'William Berg', label: 'William Berg', count: 0 },
-  ]);
-
-  const [optionSched, setOptionSched] = useState([
-    { value: 'MWF 9:00 AM - 10:00 AM', label: 'MWF 9:00 AM - 10:00 AM' },
-    { value: 'MWF 10:00 AM - 11:00 AM', label: 'MWF 10:00 AM - 11:00 AM' },
-    { value: 'TTH 1:00 PM - 2:30 PM', label: 'TTH 1:00 PM - 2:30 PM' },
-  ]);
-
-  //THIRD YEAR SECOND SEM
-  const [optionSubTSSem, setOptionSubTSSem] = useState ([
-    { value: 'CAPSTONE Project and Research 1', label: 'CAPSTONE Project and Research 1' },
-    { value: 'Integrative Programming and Technologies', label: 'Integrative Programming and Technologies' },
-    { value: 'Applications Development and Emerging Technologies', label: 'Applications Development and Emerging Technologies' }
-  ]);
-
-  const [optionFacCapstone, setOptionFacCapstone] = useState([
-    { value: 'Dr. Smith', label: 'Dr. Smith', count: 0 },
-    { value: 'Prof. Johnson', label: 'Prof. Johnson', count: 0 },
-    { value: 'Ms. Davis', label: 'Ms. Davis', count: 0 },
-  ]);
-
-  const [optionFacIPT, setOptionFacIPT] = useState([
-    { value: 'Jonas Peters', label: 'Jonas Peters', count: 0 },
-    { value: 'Colten Meadows', label: 'Colten Meadows', count: 0 },
-    { value: 'Laney Murray', label: 'Laney Murray', count: 0 },
-  ]);
-
-  const [optionAppDev, setOptionAppDev] = useState([
-    { value: 'Haiden Goodwin', label: 'Haiden Goodwin', count: 0 },
-    { value: 'Kaleigh Chambers', label: 'Kaleigh Chambers', count: 0 },
-    { value: 'Luke Rios', label: 'Luke Rios', count: 0 },
-  ]);
-
-  const [optionSched32, setOptionSched32] = useState([
-    { value: 'MWF 9:00 AM - 10:00 AM', label: 'MWF 9:00 AM - 10:00 AM' },
-    { value: 'MWF 10:00 AM - 11:00 AM', label: 'MWF 10:00 AM - 11:00 AM' },
-    { value: 'TTH 1:00 PM - 2:30 PM', label: 'TTH 1:00 PM - 2:30 PM' },
-  ]);
-
-
- //FOURTH YEAR FIRST SEM
- const [optionSubFourthFSem, setOptionSubFourthFSem] = useState ([
-  { value: 'CAPSTONE Project and Research 2', label: 'CAPSTONE Project and Research 2' },
-  { value: 'System Administration and Maintenance', label: 'System Administration and Maintenance' },
-  { value: 'Social and Professional Issues', label: 'Social and Professional Issues' }
-]);
-
-const [optionFacCapstone2, setOptionFacCapstone2] = useState([
-  { value: 'Mara Cross', label: 'Dr. Smith', count: 0 },
-  { value: 'Jessie Day', label: 'Prof. Johnson', count: 0 },
-  { value: 'Savanna Neal', label: 'Ms. Davis', count: 0 },
-]);
-
-const [optionFacSAM, setOptionFacSAM] = useState([
-  { value: 'Charity Mcgee', label: 'Jonas Peters', count: 0 },
-  { value: 'Colten Meadows', label: 'Colten Meadows', count: 0 },
-  { value: 'Laney Ponce', label: 'Laney Murray', count: 0 },
-]);
-
-const [optionSPI, setOptionSPI] = useState([
-  { value: 'Santiago Hopkins', label: 'Haiden Goodwin', count: 0 },
-  { value: 'Giovanny Abbott', label: 'Kaleigh Chambers', count: 0 },
-  { value: 'Kayla Joseph', label: 'Luke Rios', count: 0 },
-]);
-
-const [optionSched41, setOptionSched41] = [
-  { value: 'MWF 9:00 AM - 10:00 AM', label: 'MWF 9:00 AM - 10:00 AM' },
-  { value: 'MWF 10:00 AM - 11:00 AM', label: 'MWF 10:00 AM - 11:00 AM' },
-  { value: 'TTH 1:00 PM - 2:30 PM', label: 'TTH 1:00 PM - 2:30 PM' },
-];
 
 
   

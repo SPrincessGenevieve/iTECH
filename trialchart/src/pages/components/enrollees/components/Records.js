@@ -139,6 +139,7 @@ const [editedMlastname, setEditedMlastname] = useState('');
 const [editedMfirstname, setEditedMfirstname] = useState('');
 const [editedMage, setEditedMage] = useState('');
 const [editedMeducAttain, setEditedMeducAttain] = useState('');
+const [editedPeducAttain, setEditedPeducAttain] = useState('');
 const [editedMaddres, setEditedMaddres] = useState('');
 const [editedMincome, setEditedMincome] = useState('');
 const [editedMEmail, setEditedMEmail] = useState('');
@@ -146,7 +147,7 @@ const [editedMContact, setEditedMContact] = useState('');
 const [editedPlastname, setEditedPlastname] = useState('');
 const [editedPfirstname, setEditedPfirstname] = useState('');
 const [editedPage, setEditedPage] = useState('');
-const [editedPeducAttain, setEditedPeducAttain] = useState('');
+
 const [editedPaddres, setEditedPaddres] = useState('');
 const [editedPincome, setEditedPincome] = useState('');
 const [editedPEmail, setEditedPEmail] = useState('');
@@ -515,6 +516,7 @@ const handleCancelEdit = () => {
       Mfirstname: newMfirstname !== "" ? newMfirstname : row.Mfirstname,
       Mage: newMage !== "" ? newMage : row.Mage,
       MeducAttain: newMeducation !== "" ? newMeducation : row.MeducAttain,
+      PeducAttain: newPeducation !== "" ? newPeducation : row.PeducAttain,
       Maddres: newMaddress !== "" ? newMaddress : row.Maddres,
       Mincome: newMincome !== "" ? newMincome : row.Mincome,
       MEmail: newMemail !== "" ? newMemail : row.MEmail,
@@ -523,7 +525,7 @@ const handleCancelEdit = () => {
       Plastname: newPlastname !== "" ? newPlastname : row.Plastname,
       Pfirstname: newPfirstname !== "" ? newPfirstname : row.Pfirstname,
       Page: newPage !== "" ? newPage : row.Page,
-      PeducAttain: newPeducation !== "" ? newPeducation : row.PeducAttain,
+      
       Paddres: newPaddress !== "" ? newPaddress : row.Paddres,
       Pincome: newPincome !== "" ? newPincome : row.Pincome,
       PEmail: newPemail !== "" ? newPemail : row.PEmail,
@@ -894,8 +896,8 @@ const handleCancelEdit = () => {
                               
                               />
                               <TextFieldProps
-                                label={row.Mincome}
-                                placeholder={row.Mincome}
+                                label={row.Pincome}
+                                placeholder={row.Pincome}
                                 value={newPincome}
                                 onChange={(e) => setnewPincome(e.target.value)}
                                 helperText="Average Income"
